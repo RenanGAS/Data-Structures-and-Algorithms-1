@@ -2,9 +2,8 @@
 
 int main()
 {
-    int varInt;
-    int varInt1;
-    unsigned int sum;
+    int varInt, varInt1 = 0;
+    unsigned int sum = 0;
 
     printf("\nDigite um número inteiro positivo: ");     // Sugestão: 2147483647
     scanf("%d", &varInt);
