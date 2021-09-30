@@ -2,7 +2,6 @@
 
 int main()
 {
-
     float x0 = 1.31;
     float y0 = 3.24;
     float x1 = 1.93;
