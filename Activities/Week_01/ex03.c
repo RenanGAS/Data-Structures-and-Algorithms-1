@@ -4,13 +4,15 @@
 
 int main(int argc, char const *args[])
 {
-    double aAbs = atof(args[1]);
+    // Enviar dois argumentos: um valor exato e um aproximado (Ex. 3 e 2.7777)
+
+    double aEx = atof(args[1]);
     double aAprox = atof(args[2]);
-    double relatError;
+    double relatError = 0;
 
-    relatError = (fabs(aAbs - aAprox) / fabs(aAprox)) * 100;
+    relatError = (fabs(aEx - aAprox) / fabs(aAprox)) * 100;
 
-    printf("\nDado o valor absoluto: %.10lf, e o valor aproximado: %.10lf :\n", aAbs, aAprox);
+    printf("\nDado o valor exato: %.10lf, e o valor aproximado: %.10lf :\n", aEx, aAprox);
     printf("\n=> Temos que o Erro Relativo é de %.10lf%%\n\n", relatError);
 
     return 0;
