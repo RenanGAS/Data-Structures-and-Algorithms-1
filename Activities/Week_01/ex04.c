@@ -9,7 +9,7 @@ int main()
     double a, e, b, c;
     double r1, r2;
 
-    FILE *valuesIn = fopen("files/values.in", "r");
+    FILE *valuesIn = fopen("files/psEquation.in", "r");
     fscanf(valuesIn, "%s", equation);
     fclose(valuesIn);
 
