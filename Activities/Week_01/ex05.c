@@ -4,9 +4,10 @@
 
 int main()
 {
-    char binStr[50];
-    int sum;
-    int e = 0;
+    // Compilar o código deste jeito: gcc ex04.c -o ex04.exe -lm
+    
+    char binStr[50] = "";
+    int sum, e = 0;
 
     FILE *binConverterIn = fopen("files/binConverter.in", "r");
     fscanf(binConverterIn, "%s", binStr);
@@ -22,7 +23,7 @@ int main()
     }
 
     FILE *binConverterOut = fopen("files/binConverter.out", "w");
-    fprintf(binConverterOut, "\n=> Binário: %s\n\n=> Decimal: %d",binStr, sum);
+    fprintf(binConverterOut, "\n=> Binário: %s\n\n=> Decimal: %d", binStr, sum);
     fclose(binConverterOut);
 
     return 0;
