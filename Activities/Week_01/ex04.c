@@ -5,9 +5,11 @@
 
 int main()
 {
-    char equation[50];
-    double a, e, b, c;
-    double r1, r2;
+    // Compilar o código deste jeito: gcc ex04.c -o ex04.exe -lm
+    
+    char equation[50] = "";
+    double a, e, b, c = 0;
+    double r1, r2 = 0;
 
     FILE *valuesIn = fopen("files/psEquation.in", "r");
     fscanf(valuesIn, "%s", equation);
