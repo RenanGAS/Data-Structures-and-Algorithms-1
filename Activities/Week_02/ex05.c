@@ -12,9 +12,9 @@ int main()
 {
     Produto prod = {10, "Teclado", 98.50};
     Produto *p = (Produto *)&prod;
-    Produto *pi = (Produto *)&prod;
-    Produto *pc = (Produto *)&prod.descricao;
-    Produto *pf = (Produto *)&prod.preco;
+    int *pi = &prod.codigo;
+    char *pc = prod.descricao;
+    float *pf = &prod.preco;
 
     printf("\nElementos e endereços do objeto prod:\n");
     printf("\n%d (%p)  %s (%p)  %f (%p)\n", prod.codigo, &prod.codigo, prod.descricao, &prod.descricao, prod.preco, &prod.preco);
@@ -56,9 +56,7 @@ int main()
     printf("\n%d\n", prod.codigo);
     p->codigo = 13;
     printf("\n%d\n", prod.codigo);
-    (*pi).codigo = 14;
-    printf("\n%d\n", prod.codigo);
-    pi->codigo = 15;
+    *pi = 14;
     printf("\n%d\n", prod.codigo);
 
     printf("\n-------------------------\n");
@@ -66,18 +64,22 @@ int main()
     printf("\nValor da descrição:\n");
     strcpy(prod.descricao, "Teclado G");
     printf("\n%s\n", prod.descricao);
-    strcpy((*pc).descricao, "Teclado Ma");
-    printf("\n%s\n", (*pc).descricao);
-    strcpy(pc->descricao, "Teclado S");
-    printf("\n%s\n", pc->descricao);
+    strcpy((*p).descricao, "Teclado M");
+    printf("\n%s\n", prod.descricao);
+    strcpy(p->descricao, "Teclado S");
+    printf("\n%s\n", prod.descricao);
+    strcpy(pc, "Teclado SS");
+    printf("\n%s\n", prod.descricao);
 
     printf("\nValor do produto:\n");
     prod.preco = 200.99;
     printf("\n%f\n", prod.preco);
-    (*pf).preco = 234.99;
-    printf("\n%f\n", (*pf).preco);
-    pf->preco = 220.99;
-    printf("\n%f\n\n", pf->preco);
+    (*p).preco = 300.99;
+    printf("\n%f\n", prod.preco);
+    p->preco = 400.99;
+    printf("\n%f\n", prod.preco);
+    *pf = 500.99;
+    printf("\n%f\n", prod.preco);
 
     return 0;
 }
