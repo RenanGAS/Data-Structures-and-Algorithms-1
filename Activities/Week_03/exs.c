@@ -23,7 +23,7 @@ void imprimirVetor(int *v, int tam)
 int *criarVetor(int tam, int val)
 {
     int i;
-    int *vet = (int *)calloc(tam, 4);
+    int *vet = (int *)calloc(tam, sizeof(int));
     for (i = 0; i < tam; i++)
     {
         vet[i] = val;
@@ -32,6 +32,18 @@ int *criarVetor(int tam, int val)
 }
 
 // exercício 02
+
+int *clonarVetor(int *v, int tam)
+{
+    int i;
+    int *cloneV = (int *)calloc(tam, sizeof(int));
+
+    for (i = 0; i < tam; i++)
+    {
+        cloneV[i] = v[i];
+    }
+    return cloneV;
+}
 
 // exercício 03
 
@@ -45,8 +57,11 @@ int *criarVetor(int tam, int val)
 
 int main()
 {
+    printf("\nTeste do exercício 1:\n");
+    imprimirVetor(criarVetor(3, 1), 3);
 
-    imprimirVetor(criarVetor(4, 4), 4);
+    printf("\nTeste do exercício 2:\n");
+    imprimirVetor(clonarVetor(criarVetor(4, 2), 4), 4);
 
     return 0;
 }
