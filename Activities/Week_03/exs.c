@@ -4,6 +4,7 @@
 void imprimirVetor(int *v, int tam)
 {
     int i;
+    printf("\n");
     printf("[");
     for (i = 0; i < tam; i++)
     {
@@ -14,7 +15,10 @@ void imprimirVetor(int *v, int tam)
         }
     }
     printf("]");
-    printf("\n");
+    printf("\n\n");
+
+    free(v);
+    v = NULL;
 }
 
 // exercício 01
