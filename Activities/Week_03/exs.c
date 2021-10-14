@@ -16,9 +16,6 @@ void imprimirVetor(int *v, int tam)
     }
     printf("]");
     printf("\n\n");
-
-    free(v);
-    v = NULL;
 }
 
 // exercício 01
