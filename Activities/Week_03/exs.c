@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void imprimirVetor(int *v, int tam)
 {
@@ -87,16 +88,37 @@ void dobrar(int *v, int tam)
         }
     }
 
-    printf("\nEndereço de v: %p\n", v);
     free(v);
-    v = NULL;
     v = doubleV;
-    printf("\nNovo endereço de v: %p\n", v);
-    printf("\nSétimo elemento de v: %d\n", *(v + 6));
+
     imprimirVetor(v, 12);
 }
 
 // exercício 06
+
+typedef struct produto
+{
+    unsigned int codigo;
+    char nome[50];
+    float preco;
+} Produto;
+
+Produto *criaProduto(unsigned int cod, char nome[50], float preco)
+{
+    Produto *p = (Produto *)malloc(sizeof(Produto));
+    p->codigo = cod;
+    strcpy(p->nome, nome);
+    p->preco = preco;
+
+    return p;
+}
+
+void imprimeProduto(Produto *p)
+{
+    printf("\nCógido do produto: %d\n", p->codigo);
+    printf("\nNome do produto: %s\n", p->nome);
+    printf("\nPreço do produto: %f\n", p->preco);
+}
 
 // exercício 07
 
@@ -117,16 +139,19 @@ int main()
     printf("\nTeste do exercício 2:\n");
     imprimirVetor(clonarVetor(testV, 6), 6);
 
-    printf("\nTeste do exercício 03:\n");
+    printf("\nTeste do exercício 3:\n");
     imprimirVetor(criarVetorAleatorio(5, 100), 5);
 
-    printf("\nTeste do exercício 04:\n");
+    printf("\nTeste do exercício 4:\n");
     incrementaVetor(testV, 6);
     imprimirVetor(testV, 6);
 
-    printf("\nTeste do exercício 05:\n");
+    printf("\nTeste do exercício 5:\n");
     imprimirVetor(testV1, 6);
     dobrar(testV1, 6);
+
+    printf("\nTeste do exercício 6:\n");
+    imprimeProduto(criaProduto(0, "Pão", 9.99));
 
     return 0;
 }
