@@ -60,6 +60,15 @@ int *criarVetorAleatorio(int tam, int maxVal)
 
 // exercício 04
 
+void incrementaVetor(int *v, int tam)
+{
+    int i;
+    for (i = 0; i < tam; i++)
+    {
+        v[i] += 1;
+    }
+}
+
 // exercício 05
 
 // exercício 06
@@ -78,6 +87,10 @@ int main()
 
     printf("\nTeste do exercício 03:\n");
     imprimirVetor(criarVetorAleatorio(5, 100), 5);
+
+    printf("\nTeste do exercício 04:\n");
+    incrementaVetor(testV, 6);
+    imprimirVetor(testV, 6);
 
     return 0;
 }
