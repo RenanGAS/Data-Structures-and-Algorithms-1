@@ -47,6 +47,17 @@ int *clonarVetor(int *v, int tam)
 
 // exercício 03
 
+int *criarVetorAleatorio(int tam, int maxVal)
+{
+    int i;
+    int *v = (int *)calloc(tam, sizeof(int));
+    for (i = 0; i < tam; i++)
+    {
+        v[i] = (rand() % maxVal) + 1;
+    }
+    return v;
+}
+
 // exercício 04
 
 // exercício 05
@@ -57,11 +68,16 @@ int *clonarVetor(int *v, int tam)
 
 int main()
 {
+    int testV[6] = {1, 2, 3, 4, 5, 6};
+
     printf("\nTeste do exercício 1:\n");
     imprimirVetor(criarVetor(3, 1), 3);
 
     printf("\nTeste do exercício 2:\n");
-    imprimirVetor(clonarVetor(criarVetor(4, 2), 4), 4);
+    imprimirVetor(clonarVetor(testV, 6), 6);
+
+    printf("\nTeste do exercício 03:\n");
+    imprimirVetor(criarVetorAleatorio(5, 100), 5);
 
     return 0;
 }
