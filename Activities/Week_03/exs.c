@@ -19,6 +19,26 @@ void imprimirVetor(int *v, int tam)
     printf("\n\n");
 }
 
+void imprimirMatriz(int **m, int lin, int col)
+{
+    int i, j;
+    for (i = 0; i < lin; i++)
+    {
+        for (j = 0; j < col; j++)
+        {
+            if (j == 0)
+            {
+                printf("\n%d", m[i][j]);
+            }
+            else
+            {
+                printf(" %d", m[i][j]);
+            }
+        }
+    }
+    printf("\n\n");
+}
+
 // exercício 01
 
 int *criarVetor(int tam, int val)
@@ -122,6 +142,28 @@ void imprimeProduto(Produto *p)
 
 // exercício 07
 
+int **criarMatriz(int lin, int col, int val)
+{
+    int i;
+    int j;
+    int k;
+    int **m = (int **)calloc(lin, sizeof(int *));
+    for (i = 0; i < lin; i++)
+    {
+        m[i] = (int *)calloc(col, sizeof(int));
+    }
+
+    for (j = 0; j < lin; j++)
+    {
+        for (k = 0; k < col; k++)
+        {
+            m[j][k] = val;
+        }
+    }
+
+    return m;
+}
+
 int main()
 {
     int testV[6] = {1, 2, 3, 4, 5, 6};
@@ -152,6 +194,9 @@ int main()
 
     printf("\nTeste do exercício 6:\n");
     imprimeProduto(criaProduto(0, "Pão", 9.99));
+
+    printf("\nTeste do exercício 7:\n");
+    imprimirMatriz(criarMatriz(10, 10, 9), 10, 10);
 
     return 0;
 }
