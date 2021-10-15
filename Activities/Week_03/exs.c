@@ -137,7 +137,7 @@ void imprimeProduto(Produto *p)
 {
     printf("\nCógido do produto: %d\n", p->codigo);
     printf("\nNome do produto: %s\n", p->nome);
-    printf("\nPreço do produto: %f\n", p->preco);
+    printf("\nPreço do produto: %f\n\n", p->preco);
 }
 
 // exercício 07
