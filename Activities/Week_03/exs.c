@@ -71,6 +71,31 @@ void incrementaVetor(int *v, int tam)
 
 // exercício 05
 
+void dobrar(int *v, int tam)
+{
+    int i;
+    int *doubleV = (int *)calloc(2 * tam, sizeof(int));
+    for (i = 0; i < 2 * tam; i++)
+    {
+        if (i < tam)
+        {
+            doubleV[i] = v[i];
+        }
+        else
+        {
+            doubleV[i] = 0;
+        }
+    }
+
+    printf("\nEndereço de v: %p\n", v);
+    free(v);
+    v = NULL;
+    v = doubleV;
+    printf("\nNovo endereço de v: %p\n", v);
+    printf("\nSétimo elemento de v: %d\n", *(v + 6));
+    imprimirVetor(v, 12);
+}
+
 // exercício 06
 
 // exercício 07
@@ -78,6 +103,13 @@ void incrementaVetor(int *v, int tam)
 int main()
 {
     int testV[6] = {1, 2, 3, 4, 5, 6};
+    int *testV1 = (int *)calloc(6, sizeof(int));
+    testV1[0] = 7;
+    testV1[1] = 8;
+    testV1[2] = 9;
+    testV1[3] = 10;
+    testV1[4] = 11;
+    testV1[5] = 12;
 
     printf("\nTeste do exercício 1:\n");
     imprimirVetor(criarVetor(3, 1), 3);
@@ -91,6 +123,10 @@ int main()
     printf("\nTeste do exercício 04:\n");
     incrementaVetor(testV, 6);
     imprimirVetor(testV, 6);
+
+    printf("\nTeste do exercício 05:\n");
+    imprimirVetor(testV1, 6);
+    dobrar(testV1, 6);
 
     return 0;
 }
