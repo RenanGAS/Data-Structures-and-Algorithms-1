@@ -111,7 +111,7 @@ void dobrar(int *v, int tam)
     free(v);
     v = doubleV;
 
-    imprimirVetor(v, 12);
+    // imprimirVetor(v, 12);
 }
 
 // exercício 06
@@ -139,6 +139,8 @@ void imprimeProduto(Produto *p)
     printf("\nNome do produto: %s\n", p->nome);
     printf("\nPreço do produto: %f\n\n", p->preco);
 }
+
+// c) exemplo de utilização na função main()
 
 // exercício 07
 
