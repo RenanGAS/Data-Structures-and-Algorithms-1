@@ -6,7 +6,14 @@ void printVector(int *v, int tam)
     printf("\n[");
     for (int i = 0; i < tam; i++)
     {
-        printf("%d, ", v[i]);
+        if (i == tam - 1)
+        {
+            printf("%d", v[i]);
+        }
+        else
+        {
+            printf("%d, ", v[i]);
+        }
     }
     printf("]\n");
 }
@@ -67,40 +74,10 @@ void highestElem2(int *v, int tam, int *hElem)
 
 // Exercício 3
 
-int *mergeElem1(int *v1, int *v2, int tam1, int tam2)
-{
-    int tam3 = tam1 + tam2;
-    int menorT = tam1;
-    if (menorT > tam2)
-    {
-        menorT = tam2;
-    }
-
-    int *mergedV = (int *)calloc(tam3, sizeof(int));
-
-    for (int i = 0; i < tam3; i = i + 2)
-    {
-        if (i < menorT) // errado
-        {
-            if (v1[i] < v2[i])
-            {
-                mergedV[i] = v1[i];
-                mergedV[i + 1] = v2[i];
-            }
-            else
-            {
-                mergedV[i] = v2[i];
-                mergedV[i + 1] = v1[i];
-            }
-        }
-    }
-
-    return mergedV;
-}
 
 int main()
 {
-    int vet[5] = {1, 3, 5, 7, 9};
+    int vet[5] = {1, 2, 3, 4, 5};
 
     printf("\nTestes do exercício 1:\n");
     int sum1 = sumElem1(vet, 5);
@@ -117,9 +94,12 @@ int main()
     printf("\n=> Usando a estratégia do scanf: %d\n", hElem2);
 
     printf("\nTeste do exercício 3:\n");
-    int vet1[4] = {2, 4, 6, 8};
-    int *pVet = mergeElem1(vet, vet1, 5, 4);
-    printVector(pVet, 9);
+    int vet1[5] = {1, 3, 5, 7, 9};
+    printVector(vet1, 4);
+    int vet2[8] = {2, 4, 6, 8, 10, 11, 12, 13};
+    printVector(vet2, 8);
+    int *pVet = mergeElem1(vet1, 5, vet2, 8);
+    printVector(pVet, 13);
 
     return 0;
 }
