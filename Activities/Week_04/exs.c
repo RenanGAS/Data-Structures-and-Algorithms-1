@@ -74,6 +74,30 @@ void highestElem2(int *v, int tam, int *hElem)
 
 // Exercício 3
 
+int *mergeVectors(int *v1, int tam1, int *v2, int tam2)
+{
+    int tam3 = tam1 + tam2;
+    int *mergedV = (int *)calloc(tam3, sizeof(int));
+
+    int pos_v1 = 0;
+    int pos_v2 = 0;
+
+    for (int i = 0; i < tam3; i++)
+    {
+        if ((pos_v1 < tam1 && (v1[pos_v1] < v2[pos_v2])) || pos_v2 >= tam2)
+        {
+            mergedV[i] = v1[pos_v1];
+            pos_v1++;
+        }
+        else
+        {
+            mergedV[i] = v2[pos_v2];
+            pos_v2++;
+        }
+    }
+
+    return mergedV;
+}
 
 int main()
 {
@@ -94,12 +118,12 @@ int main()
     printf("\n=> Usando a estratégia do scanf: %d\n", hElem2);
 
     printf("\nTeste do exercício 3:\n");
-    int vet1[5] = {1, 3, 5, 7, 9};
-    printVector(vet1, 4);
-    int vet2[8] = {2, 4, 6, 8, 10, 11, 12, 13};
-    printVector(vet2, 8);
-    int *pVet = mergeElem1(vet1, 5, vet2, 8);
-    printVector(pVet, 13);
+    int vet1[8] = {1, 3, 5, 7, 9, 11, 13, 14};
+    printVector(vet1, 8);
+    int vet2[6] = {2, 4, 6, 8, 10, 12};
+    printVector(vet2, 6);
+    int *pVet = mergeVectors(vet1, 8, vet2, 6);
+    printVector(pVet, 14);
 
     return 0;
 }
