@@ -99,8 +99,6 @@ int *mergeVectors1(int *v1, int tam1, int *v2, int tam2)
     return mergedV;
 }
 
-// Não testado
-
 void mergeVectors2(int *v1, int tam1, int *v2, int tam2, int *mergedV, int tamMerged)
 {
     int pos_v1 = 0;
@@ -123,53 +121,53 @@ void mergeVectors2(int *v1, int tam1, int *v2, int tam2, int *mergedV, int tamMe
 
 // Exercício 4    // Não testado
 
-int numberOfChar1(char str[])
-{
-    int count = 0;
+// int numberOfChar1(char str[])
+// {
+//     int count = 0;
 
-    for (int i = 0; str[i] != "\0"; i++)
-    {
-        if (str[i] != 32)
-        {
-            count++;
-        }
-    }
+//     for (int i = 0; str[i] != "\0"; i++)
+//     {
+//         if (str[i] != 32)
+//         {
+//             count++;
+//         }
+//     }
 
-    return count;
-}
+//     return count;
+// }
 
-void numberOfChar2(char str[], int *count)
-{
-    for (int i = 0; str[i] != "\0"; i++)
-    {
-        if (str[i] != 32)
-        {
-            *count++;
-        }
-    }
-}
+// void numberOfChar2(char str[], int *count)
+// {
+//     for (int i = 0; str[i] != "\0"; i++)
+//     {
+//         if (str[i] != 32)
+//         {
+//             *count++;
+//         }
+//     }
+// }
 
-// Exercício 5  // Não testado
+// // Exercício 5  // Não testado
 
-char *reverseStr1(char str[], int tam)
-{
-    char *inversedStr = (char *)calloc(tam, sizeof(char));
+// char *reverseStr1(char str[], int tam)
+// {
+//     char *inversedStr = (char *)calloc(tam, sizeof(char));
 
-    for (int i = tam - 1; i >= 0; i--)
-    {
-        inversedStr[i] = str[i];
-    }
+//     for (int i = tam - 1; i >= 0; i--)
+//     {
+//         inversedStr[i] = str[i];
+//     }
 
-    return inversedStr;
-}
+//     return inversedStr;
+// }
 
-void reverseStr2(char str[], int tam, char *inversedStr)
-{
-    for (int i = tam - 1; i >= 0; i--)
-    {
-        inversedStr[i] = str[i];
-    }
-}
+// void reverseStr2(char str[], int tam, char *inversedStr)
+// {
+//     for (int i = tam - 1; i >= 0; i--)
+//     {
+//         inversedStr[i] = str[i];
+//     }
+// }
 
 int main()
 {
@@ -202,20 +200,20 @@ int main()
     mergeVectors2(vet1, 8, vet2, 6, pVet2, 14); // Não testado
     printVector(pVet2, 14);
 
-    printf("\nTeste do exercício 4:\n"); // Não testado
-    char str[50] = " Me chamo Renan Guensuke Aoki Sakashita";
-    int numChar1 = numberOfChar1(str);
-    printf("\nUsando return: %d\n", numChar1);
-    int numChar2 = 0;
-    numberOfChar2(str, &numChar2);
-    printf("\nUsando a estratégia do scanf: %d\n", numChar2);
+    // printf("\nTeste do exercício 4:\n"); // Não testado
+    // char str[50] = " Me chamo Renan Guensuke Aoki Sakashita";
+    // int numChar1 = numberOfChar1(str);
+    // printf("\nUsando return: %d\n", numChar1);
+    // int numChar2 = 0;
+    // numberOfChar2(str, &numChar2);
+    // printf("\nUsando a estratégia do scanf: %d\n", numChar2);
 
-    printf("\nTeste do exercício 5:\n"); // Não testado
-    char str[10] = "UTFPR - Campo Mourao";
-    // Dúvida na aplicação do return em strings
-    char reverseStr[10] = "";
-    reverseStr2(str, 10, reverseStr);
-    printf("\n=> Usando a estratégia do scanf: %s\n", reverseStr);
+    // printf("\nTeste do exercício 5:\n"); // Não testado
+    // char str[10] = "UTFPR - Campo Mourao";
+    // // Dúvida na aplicação do return em strings
+    // char reverseStr[10] = "";
+    // reverseStr2(str, 10, reverseStr);
+    // printf("\n=> Usando a estratégia do scanf: %s\n", reverseStr);
 
     return 0;
 }
