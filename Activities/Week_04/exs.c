@@ -74,7 +74,7 @@ void highestElem2(int *v, int tam, int *hElem)
 
 // Exercício 3
 
-int *mergeVectors(int *v1, int tam1, int *v2, int tam2)
+int *mergeVectors1(int *v1, int tam1, int *v2, int tam2)
 {
     int tam3 = tam1 + tam2;
     int *mergedV = (int *)calloc(tam3, sizeof(int));
@@ -97,6 +97,28 @@ int *mergeVectors(int *v1, int tam1, int *v2, int tam2)
     }
 
     return mergedV;
+}
+
+// Não testado
+
+void mergeVectors2(int *v1, int tam1, int *v2, int tam2, int *mergedV, int tamMerged)
+{
+    int pos_v1 = 0;
+    int pos_v2 = 0;
+
+    for (int i = 0; i < tamMerged; i++)
+    {
+        if ((pos_v1 < tam1 && (v1[pos_v1] < v2[pos_v2])) || pos_v2 >= tam2)
+        {
+            mergedV[i] = v1[pos_v1];
+            pos_v1++;
+        }
+        else
+        {
+            mergedV[i] = v2[pos_v2];
+            pos_v2++;
+        }
+    }
 }
 
 int main()
@@ -122,8 +144,13 @@ int main()
     printVector(vet1, 8);
     int vet2[6] = {2, 4, 6, 8, 10, 12};
     printVector(vet2, 6);
-    int *pVet = mergeVectors(vet1, 8, vet2, 6);
-    printVector(pVet, 14);
+    int *pVet1 = mergeVectors1(vet1, 8, vet2, 6);
+    int pVet2[14] = {}; 
+    mergeVectors2(vet1, 8, vet2, 6, pVet2, 14); // Não testado
+    printf("\n=> Usando return:\n");
+    printVector(pVet1, 14);
+    printf("\n=> Usando a estratégia do scanf:\n");
+    printVector(pVet2, 14);
 
     return 0;
 }
