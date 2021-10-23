@@ -121,6 +121,34 @@ void mergeVectors2(int *v1, int tam1, int *v2, int tam2, int *mergedV, int tamMe
     }
 }
 
+// Exercício 4
+
+int numberOfChar1(char str[])
+{
+    int count = 0;
+
+    for (int i = 0; str[i] != "\0"; i++)
+    {
+        if (str[i] != 32)
+        {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+void numberOfChar2(char str[], int *count)
+{
+    for (int i = 0; str[i] != "\0"; i++)
+    {
+        if (str[i] != 32)
+        {
+            *count++;
+        }
+    }
+}
+
 int main()
 {
     int vet[5] = {1, 2, 3, 4, 5};
@@ -144,13 +172,21 @@ int main()
     printVector(vet1, 8);
     int vet2[6] = {2, 4, 6, 8, 10, 12};
     printVector(vet2, 6);
-    int *pVet1 = mergeVectors1(vet1, 8, vet2, 6);
-    int pVet2[14] = {}; 
-    mergeVectors2(vet1, 8, vet2, 6, pVet2, 14); // Não testado
     printf("\n=> Usando return:\n");
+    int *pVet1 = mergeVectors1(vet1, 8, vet2, 6);
     printVector(pVet1, 14);
     printf("\n=> Usando a estratégia do scanf:\n");
+    int pVet2[14] = {};
+    mergeVectors2(vet1, 8, vet2, 6, pVet2, 14); // Não testado
     printVector(pVet2, 14);
 
+    printf("\nTeste do exercício 4:\n");
+    char str[50] = " Me chamo Renan Guensuke Aoki Sakashita";
+    int numChar1 = numberOfChar1(str);
+    printf("\nUsando return: %d\n", numChar1); 
+    int numChar2 = 0;
+    numberOfChar2(str, &numChar2);
+    printf("\nUsando a estratégia do scanf: %d\n", numChar2);
+    
     return 0;
 }
