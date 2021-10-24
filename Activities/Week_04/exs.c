@@ -18,6 +18,18 @@ void printVector(int *v, int tam)
     printf("]\n");
 }
 
+int lengthStr(char str[])
+{
+    int count = 0;
+
+    for (int i = 0; str[i] != 0; i++)
+    {
+        count++;
+    }
+
+    return count;
+}
+
 // Exercício 1
 
 int sumElem1(int *v, int tam)
@@ -147,6 +159,35 @@ void numberOfChar2(char str[], int *count)
     }
 }
 
+// Exercício 7
+
+char *myStrCpy1(char str[])
+{
+    int realTam = lengthStr(str);
+    char *strCpy = (char *)calloc(realTam + 1, sizeof(char));
+
+    for (int i = 0; i < realTam; i++)
+    {
+        strCpy[i] = str[i];
+    }
+
+    return strCpy;
+}
+
+void myStrCpy2(char str[], char **strCpy)
+{
+    int realTam = lengthStr(str);
+
+    char *auxCpy = (char *)calloc(realTam + 1, sizeof(char));
+
+    for (int i = 0; i < realTam; i++)
+    {
+        auxCpy[i] = str[i];
+    }
+
+    *strCpy = auxCpy;
+}
+
 // // Exercício 5
 
 // char *reverseStr1(char str[], int tam)
@@ -256,9 +297,17 @@ int main()
     char phrase[50] = "O Rato Roeu A roupa do Rei de Roma";
     int qtdeV1 = qtdeVowels1(phrase);
     printf("\nUsando return: %d\n", qtdeV1);
-    int qtdeV2 = 0; 
+    int qtdeV2 = 0;
     qtdeVowels2(phrase, &qtdeV2);
     printf("\nUsando a estratégia do scanf: %d\n", qtdeV2);
+
+    printf("\nTeste do exercício 7:\n");
+    char string[50] = "String copiada";
+    char *strCpy1 = myStrCpy1(string);
+    printf("\nUsando return: %s\n", strCpy1);
+    char *strCpy2;
+    myStrCpy2(string, &strCpy2);
+    printf("\nUsando a estratégia do scanf: %s\n", strCpy2);
 
     return 0;
 }
