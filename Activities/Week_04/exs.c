@@ -42,6 +42,33 @@ int lengthCharPointer(char *str)
     return count;
 }
 
+int numberOfOddPair(int *v, int tam, char choice)
+{
+    int countOdd = 0;
+    int countPair = 0;
+
+    for (int i = 0; i < tam; i++)
+    {
+        if (v[i] % 2 == 0)
+        {
+            countPair++;
+        }
+        else
+        {
+            countOdd++;
+        }
+    }
+
+    if (choice == 'o')
+    {
+        return countOdd;
+    }
+    else
+    {
+        return countPair;
+    }
+}
+
 // Exercício 1
 
 int sumElem1(int *v, int tam)
@@ -271,6 +298,60 @@ void qtdeVowels2(char str[], int *qtdeV)
     }
 }
 
+// Exercício 8
+
+int pair(int n)
+{
+    if (n % 2 == 0)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+int odd(int n)
+{
+    if (n % 2 != 0)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+void filter(int *numbers, int tam, int **filteredN, int (*function)(int))
+{
+    int x = 0;
+
+    if (function(2))
+    {
+        x = numberOfOddPair(numbers, tam, 'p');
+    }
+    else
+    {
+        x = numberOfOddPair(numbers, tam, 'o');
+    }
+
+    int *aux = (int *)calloc(x, sizeof(int));
+    int j = 0;
+
+    for (int i = 0; i < tam; i++)
+    {
+        if (function(numbers[i]))
+        {
+            aux[j] = numbers[i];
+            j++;
+        }
+    }
+
+    *filteredN = aux;
+}
+
 int main()
 {
     int vet[5] = {1, 2, 3, 4, 5};
@@ -333,6 +414,13 @@ int main()
     char *strCpy2;
     myStrCpy2(string, &strCpy2);
     printf("\nUsando a estratégia do scanf: %s\n", strCpy2);
+
+    printf("\nTeste do exercício 8:\n");
+    int numbers[7] = {43, 22, 53, 16, 87, 21, 76};
+    int *filteredNumbers;
+    filter(numbers, 7, &filteredNumbers, odd);
+    printVector(numbers, 7);
+    printVector(filteredNumbers, 4);
 
     return 0;
 }
