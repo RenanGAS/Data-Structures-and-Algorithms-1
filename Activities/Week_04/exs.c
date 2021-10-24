@@ -119,35 +119,35 @@ void mergeVectors2(int *v1, int tam1, int *v2, int tam2, int *mergedV, int tamMe
     }
 }
 
-// Exercício 4    // Não testado
+// Exercício 4 
 
-// int numberOfChar1(char str[])
-// {
-//     int count = 0;
+int numberOfChar1(char str[])
+{
+    int count = 0;
 
-//     for (int i = 0; str[i] != "\0"; i++)
-//     {
-//         if (str[i] != 32)
-//         {
-//             count++;
-//         }
-//     }
+    for (int i = 0; str[i] != 0; i++)
+    {
+        if (str[i] != 32)
+        {
+            count++;
+        }
+    }
 
-//     return count;
-// }
+    return count;
+}
 
-// void numberOfChar2(char str[], int *count)
-// {
-//     for (int i = 0; str[i] != "\0"; i++)
-//     {
-//         if (str[i] != 32)
-//         {
-//             *count++;
-//         }
-//     }
-// }
+void numberOfChar2(char str[], int *count)
+{
+    for (int i = 0; str[i] != 0; i++)
+    {
+        if (str[i] != 32)
+        {
+            *count += 1;
+        }
+    }
+}
 
-// // Exercício 5  // Não testado
+// // Exercício 5
 
 // char *reverseStr1(char str[], int tam)
 // {
@@ -197,16 +197,16 @@ int main()
     printVector(pVet1, 14);
     printf("\n=> Usando a estratégia do scanf:\n");
     int pVet2[14] = {};
-    mergeVectors2(vet1, 8, vet2, 6, pVet2, 14); // Não testado
+    mergeVectors2(vet1, 8, vet2, 6, pVet2, 14);
     printVector(pVet2, 14);
 
-    // printf("\nTeste do exercício 4:\n"); // Não testado
-    // char str[50] = " Me chamo Renan Guensuke Aoki Sakashita";
-    // int numChar1 = numberOfChar1(str);
-    // printf("\nUsando return: %d\n", numChar1);
-    // int numChar2 = 0;
-    // numberOfChar2(str, &numChar2);
-    // printf("\nUsando a estratégia do scanf: %d\n", numChar2);
+    printf("\nTeste do exercício 4:\n");
+    char str[50] = " Me chamo Renan Guensuke Aoki Sakashita";
+    int numChar1 = numberOfChar1(str);
+    printf("\nUsando return: %d\n", numChar1);
+    int numChar2 = 0;
+    numberOfChar2(str, &numChar2);
+    printf("\nUsando a estratégia do scanf: %d\n", numChar2);
 
     // printf("\nTeste do exercício 5:\n"); // Não testado
     // char str[10] = "UTFPR - Campo Mourao";
