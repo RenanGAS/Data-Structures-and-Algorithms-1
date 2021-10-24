@@ -119,7 +119,7 @@ void mergeVectors2(int *v1, int tam1, int *v2, int tam2, int *mergedV, int tamMe
     }
 }
 
-// Exercício 4 
+// Exercício 4
 
 int numberOfChar1(char str[])
 {
@@ -169,6 +169,43 @@ void numberOfChar2(char str[], int *count)
 //     }
 // }
 
+// Exercício 6
+
+int qtdeVowels1(char str[])
+{
+    int vowels[10] = {65, 69, 73, 79, 85, 97, 101, 105, 111, 117};
+    int count = 0;
+
+    for (int i = 0; str[i] != 0; i++)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            if (str[i] == vowels[j])
+            {
+                count++;
+            }
+        }
+    }
+
+    return count;
+}
+
+void qtdeVowels2(char str[], int *qtdeV)
+{
+    int vowels[10] = {65, 69, 73, 79, 85, 97, 101, 105, 111, 117};
+
+    for (int i = 0; str[i] != 0; i++)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            if (str[i] == vowels[j])
+            {
+                *qtdeV += 1;
+            }
+        }
+    }
+}
+
 int main()
 {
     int vet[5] = {1, 2, 3, 4, 5};
@@ -214,6 +251,14 @@ int main()
     // char reverseStr[10] = "";
     // reverseStr2(str, 10, reverseStr);
     // printf("\n=> Usando a estratégia do scanf: %s\n", reverseStr);
+
+    printf("\nTeste do exercício 6:\n");
+    char phrase[50] = "O Rato Roeu A roupa do Rei de Roma";
+    int qtdeV1 = qtdeVowels1(phrase);
+    printf("\nUsando return: %d\n", qtdeV1);
+    int qtdeV2 = 0; 
+    qtdeVowels2(phrase, &qtdeV2);
+    printf("\nUsando a estratégia do scanf: %d\n", qtdeV2);
 
     return 0;
 }
