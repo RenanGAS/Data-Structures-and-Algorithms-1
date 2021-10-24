@@ -30,6 +30,18 @@ int lengthStr(char str[])
     return count;
 }
 
+int lengthCharPointer(char *str)
+{
+    int count = 0;
+
+    for (int i = 0; str[i] != 0; i++)
+    {
+        count++;
+    }
+
+    return count;
+}
+
 // Exercício 1
 
 int sumElem1(int *v, int tam)
@@ -188,27 +200,39 @@ void myStrCpy2(char str[], char **strCpy)
     *strCpy = auxCpy;
 }
 
-// // Exercício 5
+// Exercício 5
 
-// char *reverseStr1(char str[], int tam)
-// {
-//     char *inversedStr = (char *)calloc(tam, sizeof(char));
+char *inverterStr1(char str[])
+{
+    int realTam = lengthStr(str);
 
-//     for (int i = tam - 1; i >= 0; i--)
-//     {
-//         inversedStr[i] = str[i];
-//     }
+    char *inversedStr = (char *)calloc(realTam + 1, sizeof(char));
 
-//     return inversedStr;
-// }
+    for (int i = realTam - 1; i >= 0; i--)
+    {
+        inversedStr[(realTam - 1) - i] = str[i];
+    }
 
-// void reverseStr2(char str[], int tam, char *inversedStr)
-// {
-//     for (int i = tam - 1; i >= 0; i--)
-//     {
-//         inversedStr[i] = str[i];
-//     }
-// }
+    return inversedStr;
+}
+
+void inverterStr2(char **PPstr)
+{
+    int realTam = lengthCharPointer(*PPstr);
+
+    char *aux = *PPstr;
+
+    char *inversedStr = (char *)calloc(realTam + 1, sizeof(char));
+
+    for (int i = realTam - 1; i >= 0; i--)
+    {
+        inversedStr[(realTam - 1) - i] = aux[i];
+    }
+
+    free(aux);
+
+    *PPstr = inversedStr;
+}
 
 // Exercício 6
 
@@ -286,12 +310,13 @@ int main()
     numberOfChar2(str, &numChar2);
     printf("\nUsando a estratégia do scanf: %d\n", numChar2);
 
-    // printf("\nTeste do exercício 5:\n"); // Não testado
-    // char str[10] = "UTFPR - Campo Mourao";
-    // // Dúvida na aplicação do return em strings
-    // char reverseStr[10] = "";
-    // reverseStr2(str, 10, reverseStr);
-    // printf("\n=> Usando a estratégia do scanf: %s\n", reverseStr);
+    printf("\nTeste do exercício 5:\n");
+    char str1[50] = "UTFPR - Campo Mourao";
+    char *str1Inversed = inverterStr1(str1);
+    printf("\nUsando return: %s\n", str1Inversed);
+    char *str1Clone = myStrCpy1(str1);
+    inverterStr2(&str1Clone);
+    printf("\nUsando a estratégia do scanf: %s\n", str1Clone);
 
     printf("\nTeste do exercício 6:\n");
     char phrase[50] = "O Rato Roeu A roupa do Rei de Roma";
