@@ -1,27 +1,42 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <assert.h>
 
-/*---------------------------- 
-            Passo 1.3 
-    Definição do nome do tipo
-------------------------------*/
+/*--------------------------------------------
+                    Passo 3.1
+    Escolher forma de representação dos dados
+                    na memória
+----------------------------------------------*/
 
-typedef struct
+typedef struct timer
 {
-
+    long int begin;
+    long int end;
 } Timer;
 
 /*--------------------------------------- 
-                Passo 1.4 
+            Passo 1.4 & Passo 3.2
     Definição dos protótipos das funções
+   & Revisar a forma de alocação dos dados
 -----------------------------------------*/
 
-Timer *create_timer();
+Timer *create_timer(); // Alocará 16 bytes dinamicamente para o Timer
 void free_timer(Timer **end_ptr_timer);
 void start_timer(Timer *ptr_timer);
 void stop_timer(Timer *ptr_timer);
 void reset_timer(Timer *ptr_timer);
-char *result_timer(Timer *ptr_timer);
+float result_timer(Timer *ptr_timer);
+
+/*---------------------------
+          Passo 3.3
+    Implementar as funções
+-----------------------------*/
+
+Timer *create_timer()
+{
+    Timer *ptr_timer = (Timer *)calloc(2, sizeof(long int));
+    return ptr_timer;
+}
 
 /*-----------------------------------------
                 Passo 2.1
@@ -30,7 +45,7 @@ Criar testes para os protótipos das funções
 
 int main()
 {
-    Timer *t1 = timer_criar();
+    Timer *t1 = create_timer();
 
     /**
      * Medir o tempo de execução de um trecho de código que realiza
@@ -42,7 +57,7 @@ int main()
     int interacoes = 1000 * 1000 * 1000;
     printf("Executando %d de operacoes\n", interacoes);
 
-    timer_start(t1);
+    start_timer(t1);
     //-----------------------------------------------
     for (int i = 0; i < interacoes; i++)
     {
@@ -50,8 +65,8 @@ int main()
         divisao /= 2;
     }
     //-----------------------------------------------
-    timer_stop(t1);
-    printf("Tempo decorrido: %.2f\n\n", timer_resultado(t1));
+    stop_timer(t1);
+    printf("Tempo decorrido: %.2f\n\n", result_timer(t1));
 
     /**
      * Medir o tempo de percorrer uma matriz
@@ -60,8 +75,8 @@ int main()
     long int colunas = 100000;
     printf("Executando %ld de operacoes\n", linhas * colunas);
 
-    timer_reset(t1);
-    timer_start(t1);
+    reset_timer(t1);
+    start_timer(t1);
     //-----------------------------------------------
     long int i, j;
     for (i = 0; i < linhas; i++)
@@ -73,8 +88,8 @@ int main()
     }
 
     //-----------------------------------------------
-    timer_stop(t1);
-    printf("Tempo decorrido: %.2f\n", timer_resultado(t1));
+    stop_timer(t1);
+    printf("Tempo decorrido: %.2f\n", result_timer(t1));
 
-    timer_desalocar(&t1);
+    free_timer(&t1);
 }
