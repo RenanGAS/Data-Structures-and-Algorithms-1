@@ -64,7 +64,7 @@ void reset_timer(Timer *ptr_timer)
 void free_timer(Timer **end_ptr_timer)
 {
     free(*(end_ptr_timer));
-    end_ptr_timer = NULL;
+    *end_ptr_timer = NULL;
 }
 
 /*-----------------------------------------
@@ -74,51 +74,40 @@ Criar testes para os protótipos das funções
 
 int main()
 {
-    Timer *t1 = create_timer();
+    printf(" --- TESTE INICIALIZADO:\n");
 
-    /**
-     * Medir o tempo de execução de um trecho de código que realiza
-     * 1.000.000.000 de somas e divisões  
-     */
-    long int soma = 0;
-    double divisao = 1;
+    printf("- Testando create_timer\n");
+    Timer *timer = create_timer();
+    assert(timer != NULL);
 
-    int interacoes = 1000 * 1000 * 1000;
-    printf("Executando %d de operacoes\n", interacoes);
+    printf("- Testando start_timer\n");
+    start_timer(timer);
+    assert(timer->begin != NULL);
 
-    start_timer(t1);
-    //-----------------------------------------------
-    for (int i = 0; i < interacoes; i++)
+    long int end = 1000*1000*1000;
+    for (int i = 0; i < end; i++)
     {
-        soma += i;
-        divisao /= 2;
     }
-    //-----------------------------------------------
-    stop_timer(t1);
-    printf("Tempo decorrido: %.2f\n\n", result_timer(t1));
+    printf("- Testando stop_timer\n");
+    stop_timer(timer);
+    assert(timer->end != NULL);
+    assert(timer->end != timer->begin);
 
-    /**
-     * Medir o tempo de percorrer uma matriz
-     */
-    long int linhas = 100000;
-    long int colunas = 100000;
-    printf("Executando %ld de operacoes\n", linhas * colunas);
+    printf("- Testando result_timer\n");
+    float result = result_timer(timer);
+    assert(result != 0);
 
-    reset_timer(t1);
-    start_timer(t1);
-    //-----------------------------------------------
-    long int i, j;
-    for (i = 0; i < linhas; i++)
-    {
-        for (j = 0; j < colunas; j++)
-        {
-            // leitura da matriz
-        }
-    }
+    printf("- Testando reset_timer\n");
+    reset_timer(timer);
+    assert(timer->begin == 0);
+    assert(timer->end == 0);
 
-    //-----------------------------------------------
-    stop_timer(t1);
-    printf("Tempo decorrido: %.2f\n", result_timer(t1));
+    printf("- Testando free_timer\n");
+    Timer *ptr_test = timer;
+    free_timer(&timer);
+    assert(timer != ptr_test);
 
-    free_timer(&t1);
+    pritnf(" --- TESTE FINALIZADO!\n");
+    
+    return 0;
 }
