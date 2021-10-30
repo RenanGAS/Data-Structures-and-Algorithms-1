@@ -74,7 +74,7 @@ Criar testes para os protótipos das funções
 
 int main()
 {
-    printf(" --- TESTE INICIALIZADO:\n");
+    printf("\nTESTE INICIALIZADO:\n\n");
 
     printf("- Testando create_timer\n");
     Timer *timer = create_timer();
@@ -82,7 +82,7 @@ int main()
 
     printf("- Testando start_timer\n");
     start_timer(timer);
-    assert(timer->begin != NULL);
+    assert(timer->begin != 0);
 
     long int end = 1000*1000*1000;
     for (int i = 0; i < end; i++)
@@ -90,7 +90,7 @@ int main()
     }
     printf("- Testando stop_timer\n");
     stop_timer(timer);
-    assert(timer->end != NULL);
+    assert(timer->end != 0);
     assert(timer->end != timer->begin);
 
     printf("- Testando result_timer\n");
@@ -107,7 +107,7 @@ int main()
     free_timer(&timer);
     assert(timer != ptr_test);
 
-    pritnf(" --- TESTE FINALIZADO!\n");
+    printf("\nTESTE FINALIZADO!\n");
     
     return 0;
 }
