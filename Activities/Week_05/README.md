@@ -42,10 +42,10 @@ teremos mais acesso às variáveis da struct, limitando os testes.
 
 - Quando incluímos {nome}_TAD.h no main.c, ocorre o ctrl+c ctrl+v do arquivo, incluindo algumas bibliotecas mais de uma vez. Isso
 faz com que ocorra sobreposições que podem gerar problemas, quando em larga escala, sendo necessário o uso da estrutura de guardiões:
-    - `#ifndef _{NOME}_TAD_H_`
-    - `#define _{NOME}_TAD_H_` 
-    - `// code` 
-    - `#endif` 
+    - `#ifndef _{NOME}_TAD_H_`<br />
+      `#define _{NOME}_TAD_H_`<br /> 
+      `// code`<br /> 
+      `#endif`<br /> 
 * Assim, finalizamos a etapa de refatoração.
 
 
