@@ -1,5 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <assert.h>
+#include <time.h>
 
 // Passo 1.1 - Abstração dos dados
 /*
@@ -17,14 +19,15 @@
 - Operação 6: Desalocar o Timer
 */
 
-// Passo 1.3 - Definição do nome da TAD
+// Passo 3.1 - Definir como será representado os dados da TAD
 
-typedef struct
+typedef struct timer
 {
-
+    long int time_begin;
+    long int time_end;
 } Timer;
 
-// Passo 1.4 - Construir protótipos para as funções
+// Passo 3.2 - Revisar a forma de alocação de dados das funções
 
 Timer *create_timer();
 void free_timer(Timer **end_ptr_timer);
@@ -32,6 +35,42 @@ void start_timer(Timer *ptr_timer);
 void stop_timer(Timer *ptr_timer);
 void reset_timer(Timer *ptr_timer);
 float result_timer(Timer *ptr_timer);
+
+// Passo 3.3 - Implementar as funções
+
+Timer *create_timer()
+{
+    Timer *ptr_timer = (Timer *)calloc(2, sizeof(long int));
+    return ptr_timer;
+}
+
+void start_timer(Timer *ptr_timer)
+{
+    time(&(ptr_timer->time_begin));
+}
+
+void stop_timer(Timer *ptr_timer)
+{
+    time(&(ptr_timer->time_end));
+}
+
+float result_timer(Timer *ptr_timer)
+{
+    float result = ptr_timer->time_end - ptr_timer->time_begin;
+    return result;
+}
+
+void reset_timer(Timer *ptr_timer)
+{
+    ptr_timer->time_begin = 0;
+    ptr_timer->time_end = 0;
+}
+
+void free_timer(Timer **end_ptr_timer)
+{
+    free(*(end_ptr_timer));
+    *end_ptr_timer = NULL;
+}
 
 // Passo 2.1 - Criar testes para as funções
 
@@ -45,7 +84,7 @@ int main()
 
     printf("- Testando start_timer\n");
     start_timer(timer);
-    assert(timer->begin != 0);
+    assert(timer->time_begin != 0);
 
     long int end = 1000*1000*1000;
     for (int i = 0; i < end; i++)
@@ -54,8 +93,8 @@ int main()
 
     printf("- Testando stop_timer\n");
     stop_timer(timer);
-    assert(timer->end != 0);
-    assert(timer->end != timer->begin);
+    assert(timer->time_end != 0);
+    assert(timer->time_end != timer->time_begin);
 
     printf("- Testando result_timer\n");
     float result = result_timer(timer);
@@ -63,8 +102,8 @@ int main()
 
     printf("- Testando reset_timer\n");
     reset_timer(timer);
-    assert(timer->begin == 0);
-    assert(timer->end == 0);
+    assert(timer->time_begin == 0);
+    assert(timer->time_end == 0);
 
     printf("- Testando free_timer\n");
     Timer *ptr_test = timer;
