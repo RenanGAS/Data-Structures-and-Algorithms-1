@@ -20,17 +20,17 @@
 ## Passo 4.3 - Automatizar a utilização do TAD
 
 - Criar um arquivo makefile e adicionar nos campos:
-    all: comandos para compilar o {nome}_TAD.c, e gerar o "output" do main.c junto com o compilado {nome}_TAD.o ;
-    run: comando para executar o "output" ;
-    clean: comandos para excluir o arquivo compilado e o "output".
+    - all: comandos para compilar o {nome}_TAD.c, e gerar o "output" do main.c junto com o compilado {nome}_TAD.o ;
+    - run: comando para executar o "output" ;
+    - clean: comandos para excluir o arquivo compilado e o "output".
 * Usar variáveis para tornar o arquivo makefile reutilizável.
 
 ## Passo 4.4 - Encapsular a struct
 
 - Em {nome}_TAD.h deixaremos apenas: 
-    - `typedef struct {nome} {Nome} ;` ;
+    - `typedef struct {nome} {Nome} ;`
 - Desse modo, inserimos em {nome}_TAD.c :
-    - `struct {nome} { tipo1 dado1; tipo2 dado2 ...};` " .
+    - `struct {nome} { tipo1 dado1; tipo2 dado2 ...};`
 * Feito isso, o usuário não terá acesso aos elementos do TAD:
     - O comando `{nome}->` não apresenta as variáveis da struct.
 * Também temos que, pelo main.c ter somente acesso ao {nome}_TAD.h "normalmente", qualquer função a mais que acrescentarmos em
@@ -42,12 +42,10 @@ teremos mais acesso às variáveis da struct, limitando os testes.
 
 - Quando incluímos {nome}_TAD.h no main.c, ocorre o ctrl+c ctrl+v do arquivo, incluindo algumas bibliotecas mais de uma vez. Isso
 faz com que ocorra sobreposições que podem gerar problemas, quando em larga escala, sendo necessário o uso da estrutura de guardiões:
-    - ```c
-    #ifndef _{NOME}_TAD_H_
-    #define _{NOME}_TAD_H_ 
-    // code 
-    #endif 
-    ```
+    - `#ifndef _{NOME}_TAD_H_`
+    - `#define _{NOME}_TAD_H_` 
+    - `// code` 
+    - `#endif` 
 * Assim, finalizamos a etapa de refatoração.
 
 
