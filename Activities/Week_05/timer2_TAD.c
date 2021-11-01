@@ -30,6 +30,11 @@ void stop_timer(Timer *ptr_timer)
 
 double result_timer(Timer *ptr_timer)
 {
+    if (ptr_timer->time_end == 0)
+    {
+        return -1;
+    }
+    
     double result = (double)(ptr_timer->time_end - ptr_timer->time_begin)/CLOCKS_PER_SEC;
     return result;
 }
