@@ -1,4 +1,5 @@
 #include "timer_TAD.h"
+#include <time.h>
 
 // Passo 4.4 - Encapsular a struct
 
@@ -19,17 +20,17 @@ Timer *create_timer()
 
 void start_timer(Timer *ptr_timer)
 {
-    time(&(ptr_timer->time_begin));
+    ptr_timer->time_begin = clock();
 }
 
 void stop_timer(Timer *ptr_timer)
 {
-    time(&(ptr_timer->time_end));
+    ptr_timer->time_end = clock();
 }
 
-float result_timer(Timer *ptr_timer)
+double result_timer(Timer *ptr_timer)
 {
-    float result = ptr_timer->time_end - ptr_timer->time_begin;
+    double result = (double)(ptr_timer->time_end - ptr_timer->time_begin)/CLOCKS_PER_SEC;
     return result;
 }
 

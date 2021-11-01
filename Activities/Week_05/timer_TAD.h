@@ -5,7 +5,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 
 // Passo 1.1 - Abstração dos dados
 /*
@@ -34,6 +33,6 @@ void free_timer(Timer **end_ptr_timer);
 void start_timer(Timer *ptr_timer);
 void stop_timer(Timer *ptr_timer);
 void reset_timer(Timer *ptr_timer);
-float result_timer(Timer *ptr_timer);
+double result_timer(Timer *ptr_timer);
 
 #endif
