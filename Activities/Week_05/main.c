@@ -27,7 +27,7 @@ int main()
     }
     //-----------------------------------------------
     stop_timer(t1);
-    printf("Tempo decorrido: %.2f\n\n", result_timer(t1));
+    printf("Tempo decorrido: %.2f s\n\n", result_timer(t1));
 
     /**
      * Medir o tempo de percorrer uma matriz
