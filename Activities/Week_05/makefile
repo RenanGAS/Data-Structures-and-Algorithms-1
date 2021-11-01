@@ -1,7 +1,7 @@
 # Passo 4.3 - Automatizar a utilização do TAD
 
 MAIN = main
-TAD = timer
+TAD = timer1
 
 all:
 	gcc -c ${TAD}_TAD.c

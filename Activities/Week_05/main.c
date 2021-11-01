@@ -50,7 +50,7 @@ int main()
 
     //-----------------------------------------------
     stop_timer(t1);
-    printf("Tempo decorrido: %.2f\n", result_timer(t1));
+    printf("Tempo decorrido: %.2f s\n", result_timer(t1));
 
     free_timer(&t1);
 }
