@@ -56,6 +56,7 @@ bool addIn_vector(Vector *v, int elemento)
     {
         int q = v->qtd;
         v->vet[q] = elemento;
+        v->qtd += 1;
         return true;
     }
     else
@@ -66,6 +67,41 @@ bool addIn_vector(Vector *v, int elemento)
 
 bool putIn_vector(Vector *v, int elemento, int posicao)
 {
+    int newQtd = v->qtd + 1;
+
+    if (newQtd < v->tam)
+    {
+        if (posicao < v->qtd)
+        {
+            int aux1 = 0;
+            int aux2 = 0;
+            for (int i = 0; i < newQtd; i++)
+            {
+                if (i == posicao)
+                {
+                    aux1 = v->vet[i];
+                    v->vet[i] = elemento;
+                }
+                else if (i > posicao)
+                {
+                    aux2 = v->vet[i];
+                    v->vet[i] = aux1;
+                    aux1 = aux2;
+                }
+            }
+
+            return true;
+        }
+        else
+        {
+            replaceIn_vector(v, posicao, elemento);
+        }
+    }
+    else
+    {
+        double_vector(v, &v);
+        return false;
+    }
 }
 
 bool replaceIn_vector(Vector *v, int posicao, int novoElemento)
