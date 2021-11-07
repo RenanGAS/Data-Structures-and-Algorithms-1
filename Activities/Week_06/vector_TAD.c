@@ -89,11 +89,12 @@ bool putIn_vector(Vector *v, int elemento, int posicao)
                     aux1 = aux2;
                 }
             }
-
+            v->qtd += 1;
             return true;
         }
         else
         {
+            v->qtd += 1;
             replaceIn_vector(v, posicao, elemento);
         }
     }
@@ -106,6 +107,8 @@ bool putIn_vector(Vector *v, int elemento, int posicao)
 
 bool replaceIn_vector(Vector *v, int posicao, int novoElemento)
 {
+    v->vet[posicao] = novoElemento;
+    return true;
 }
 
 bool rmPosition_vector(Vector *v, int posicao, int *endereco)
@@ -116,8 +119,9 @@ int rmElement_vector(Vector *v, int elemento)
 {
 }
 
-int lenght_vector(Vector *v)
+int length_vector(Vector *v)
 {
+    return v->qtd;
 }
 
 bool elementIn_vector(Vector *v, int posicao, int *saida)
@@ -130,12 +134,34 @@ int positionIn_vector(Vector *v, int elemento)
 
 void print_vector(Vector *v)
 {
+    printf("\n[");
+    for (int i = 0; i < v->tam; i++)
+    {
+        if (i == (v->tam - 1))
+        {
+            printf("%d]\n", v->vet[i]);
+        }
+        else
+        {
+            printf("%d, ", v->vet[i]);
+        }
+    }
 }
 
 void free_vector(Vector **endVetor)
 {
+    free(*endVetor);
+    *endVetor = NULL;
 }
 
 bool toString_vector(Vector *v, char *saida)
 {
+    saida[0] = "[";
+    for (int i = 1; i <= v->tam; i++)
+    {
+        itoa(v->vet[i - 1], saida[i], 10);
+    }
+    saida[v->tam + 1] = "]";
+
+    return true;
 }
