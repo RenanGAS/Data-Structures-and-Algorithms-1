@@ -12,17 +12,6 @@ struct vector
 
 // Funções Adicionadas
 
-Vector *createWithNewSize_vector(Vector *v, int newSize)
-{
-    Vector *newVector = (Vector *)calloc(4, sizeof(int));
-    int *int_vector = (int *)calloc(newSize, sizeof(int));
-    newVector->vet = int_vector;
-    newVector->tam = newSize;
-    newVector->qtd = v->qtd;
-
-    return newVector;
-}
-
 void freeAndAtt_intV_vector(Vector *v, int *newIntVector, int newTam)
 {
     free(v->vet);
