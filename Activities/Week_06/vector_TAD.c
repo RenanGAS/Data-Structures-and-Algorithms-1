@@ -8,20 +8,26 @@ struct vector
     int qtd;
 };
 
-void free_vector(Vector **endVetor)
+
+// Funções Adicionadas
+
+Vector *createWithSize_vector(int n)
 {
-    free(*endVetor);
-    *endVetor = NULL;
+    Vector *newVector = (Vector *)calloc(n, sizeof(int));
+    newVector->tam = n;
+    newVector->qtd = 0;
+
+    return newVector;
 }
 
-void freeAndAttribute_vector(Vector **endVetor, Vector *newVector) // Função adicionada
+void freeAndAttribute_vector(Vector **endVetor, Vector *newVector)
 {
     free(*endVetor);
     *endVetor = NULL;
     *endVetor = newVector;
 }
 
-void double_vector(Vector *v, Vector **end_v) // Função adicionada
+void double_vector(Vector *v, Vector **end_v)
 {
     int tam_origin = v->tam;
 
@@ -34,11 +40,10 @@ void double_vector(Vector *v, Vector **end_v) // Função adicionada
         doubleVector->vet[i] = v->vet[i];
     }
 
-    free_vector(end_v);
-    *end_v = doubleVector;
+    freeAndAttribute_vector(end_v, doubleVector);
 }
 
-bool validate_vector(Vector *v) // Função adicionada
+bool validate_vector(Vector *v) 
 {
     int t = v->tam;
     int q = v->qtd;
@@ -54,19 +59,13 @@ bool validate_vector(Vector *v) // Função adicionada
     }
 }
 
+
+// Funções Principais
+
 Vector *create_vector()
 {
     Vector *newVector = (Vector *)calloc(10, sizeof(int));
     newVector->tam = 10;
-    newVector->qtd = 0;
-
-    return newVector;
-}
-
-Vector *createWithSize_vector(int n) // Função adicionada
-{
-    Vector *newVector = (Vector *)calloc(n, sizeof(int));
-    newVector->tam = n;
     newVector->qtd = 0;
 
     return newVector;
@@ -181,10 +180,40 @@ int length_vector(Vector *v)
 
 bool elementIn_vector(Vector *v, int posicao, int *saida)
 {
+    if ((posicao >= 0) && (posicao < v->tam))
+    {
+        for (int i = 0; i < v->vet; i++)
+        {
+            if (v->vet[i] == v->vet[posicao])
+            {
+                saida = v->vet[i];
+                break;
+            }
+        }
+
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 int positionIn_vector(Vector *v, int elemento)
 {
+    int stop = 0;
+    int *pos = -1;
+
+    for (int i = 0; i < v->tam; i++)
+    {
+        if (v->vet[i] == elemento)
+        {
+            pos = &(v->vet[i]);
+            break;
+        }
+    }
+
+    return pos;
 }
 
 void print_vector(Vector *v)
@@ -203,12 +232,18 @@ void print_vector(Vector *v)
     }
 }
 
+void free_vector(Vector **endVetor)
+{
+    free(*endVetor);
+    *endVetor = NULL;
+}
+
 bool toString_vector(Vector *v, char *saida)
 {
     saida[0] = "[";
     for (int i = 1; i <= v->tam; i++)
     {
-        itoa(v->vet[i - 1], saida[i], 10);
+        itoa(v->vet[i - 1], &(saida[i]), 10);
     }
     saida[v->tam + 1] = "]";
 
