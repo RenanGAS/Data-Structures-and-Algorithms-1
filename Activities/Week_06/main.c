@@ -81,6 +81,6 @@ int main()
 	char str[200];
 	print_vector(v);
 	toString_vector(v, str);
-	printf("\nRESULTADO: ");
-	printf("%s", str);
+	printf("\nRESULTADO:\n");
+	printf("\n%s\n\n", str);
 }
