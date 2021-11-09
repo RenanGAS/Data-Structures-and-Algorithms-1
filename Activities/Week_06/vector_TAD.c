@@ -1,5 +1,7 @@
 #include "vector_TAD.h"
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 struct vector
 {
@@ -8,49 +10,49 @@ struct vector
     int qtd;
 };
 
-
 // Funções Adicionadas
 
-Vector *createWithSize_vector(int n)
+Vector *createWithNewSize_vector(Vector *v, int newSize)
 {
-    Vector *newVector = (Vector *)calloc(n, sizeof(int));
-    newVector->tam = n;
-    newVector->qtd = 0;
+    Vector *newVector = (Vector *)calloc(4, sizeof(int));
+    int *int_vector = (int *)calloc(newSize, sizeof(int));
+    newVector->vet = int_vector;
+    newVector->tam = newSize;
+    newVector->qtd = v->qtd;
 
     return newVector;
 }
 
-void freeAndAttribute_vector(Vector **endVetor, Vector *newVector)
+void freeAndAtt_intV_vector(Vector *v, int *newIntVector, int newTam)
 {
-    free(*endVetor);
-    *endVetor = NULL;
-    *endVetor = newVector;
+    free(v->vet);
+    v->vet = NULL;
+    v->tam = newTam;
+    v->vet = newIntVector;
 }
 
-void double_vector(Vector *v, Vector **end_v)
+void double_vector(Vector *v)
 {
     int tam_origin = v->tam;
 
-    Vector *doubleVector = (Vector *)calloc(tam_origin * 2, sizeof(int));
-    doubleVector->tam = tam_origin * 2;
-    doubleVector->qtd = v->qtd;
+    int *doubleV = (int *)calloc(tam_origin * 2, sizeof(int));
 
     for (int i = 0; i < tam_origin; i++)
     {
-        doubleVector->vet[i] = v->vet[i];
+        doubleV[i] = v->vet[i];
     }
 
-    freeAndAttribute_vector(end_v, doubleVector);
+    freeAndAtt_intV_vector(v, doubleV, tam_origin * 2);
 }
 
-bool validate_vector(Vector *v) 
+bool validate_vector(Vector *v)
 {
     int t = v->tam;
     int q = v->qtd;
 
     if (t == q)
     {
-        double_vector(v, &v);
+        double_vector(v);
         return false;
     }
     else
@@ -59,12 +61,13 @@ bool validate_vector(Vector *v)
     }
 }
 
-
 // Funções Principais
 
 Vector *create_vector()
 {
-    Vector *newVector = (Vector *)calloc(10, sizeof(int));
+    Vector *newVector = (Vector *)calloc(4, sizeof(int));
+    int *int_vector = (int *)calloc(10, sizeof(int));
+    newVector->vet = int_vector;
     newVector->tam = 10;
     newVector->qtd = 0;
 
@@ -90,30 +93,33 @@ bool putIn_vector(Vector *v, int elemento, int posicao)
 {
     if (v->qtd < v->tam)
     {
-        Vector *newV = createWithSize_vector(v->tam + 1);
+        int new_tam = v->tam + 1;
+        int *new_intV = (int *)calloc(new_tam, sizeof(int));
 
         int countForV = 0;
 
-        for (int i = 0; i < newV->tam; i++)
+        for (int i = 0; i < new_tam; i++)
         {
             if (i != posicao)
             {
-                newV->vet[i] = v->vet[countForV];
+                new_intV[i] = v->vet[countForV];
                 countForV += 1;
             }
             else
             {
-                newV->vet[i] = elemento;
+                new_intV[i] = elemento;
             }
         }
 
-        freeAndAttribute_vector(&v, newV);
+        freeAndAtt_intV_vector(v, new_intV, new_tam);
+
+        v->qtd += 1;
 
         return true;
     }
     else
     {
-        double_vector(v, &v);
+        double_vector(v);
         return false;
     }
 }
@@ -121,54 +127,75 @@ bool putIn_vector(Vector *v, int elemento, int posicao)
 bool replaceIn_vector(Vector *v, int posicao, int novoElemento)
 {
     v->vet[posicao] = novoElemento;
+
+    if (posicao >= v->qtd)
+    {
+        v->qtd += 1;
+    }
     return true;
 }
 
 bool rmPosition_vector(Vector *v, int posicao, int *endereco)
 {
-    Vector *newV = createWithSize_vector(v->tam - 1);
+    int new_tam = v->tam - 1;
+    int *new_intV = (int *)calloc(new_tam, sizeof(int));
 
     int countForV = 0;
 
-    for (int i = 0; i < newV->tam; i++)
+    for (int i = 0; i < new_tam; i++)
     {
         if (countForV != posicao)
         {
-            newV->vet[i] = v->vet[countForV];
+            new_intV[i] = v->vet[countForV];
+            countForV++;
         }
-
-        countForV++;
+        else
+        {
+            countForV++;
+            new_intV[i] = v->vet[countForV];
+            countForV++;
+        }
     }
 
-    endereco = v->vet[posicao];
+    *endereco = v->vet[posicao];
 
-    freeAndAttribute_vector(&v, newV);
+    if (posicao < v->qtd)
+    {
+        v->qtd -= 1;
+    }
+
+    freeAndAtt_intV_vector(v, new_intV, new_tam);
 
     return true;
 }
 
 int rmElement_vector(Vector *v, int elemento)
 {
-    Vector *newV = createWithSize_vector(v->tam - 1);
+    int new_tam = v->tam - 1;
+    int *new_intV = (int *)calloc(new_tam, sizeof(int));
 
     int stop = 0;
     int countForV = 0;
 
-    for (int i = 0; i < newV->tam; i++)
+    for (int i = 0; i < new_tam; i++)
     {
         if ((v->vet[countForV] == elemento) && stop == 0)
         {
-            newV->vet[i] = v->vet[countForV];
+            countForV++;
+            new_intV[i] = v->vet[countForV];
             stop = 1;
+            countForV++;
         }
         else
         {
-            newV->vet[i] = v->vet[countForV];
+            new_intV[i] = v->vet[countForV];
+            countForV++;
         }
-        countForV++;
     }
 
-    freeAndAttribute_vector(&v, newV);
+    freeAndAtt_intV_vector(v, new_intV, new_tam);
+
+    v->qtd -= 1;
 
     return true;
 }
@@ -182,11 +209,11 @@ bool elementIn_vector(Vector *v, int posicao, int *saida)
 {
     if ((posicao >= 0) && (posicao < v->tam))
     {
-        for (int i = 0; i < v->vet; i++)
+        for (int i = 0; i < v->tam; i++)
         {
             if (v->vet[i] == v->vet[posicao])
             {
-                saida = v->vet[i];
+                *saida = v->vet[i];
                 break;
             }
         }
@@ -202,13 +229,13 @@ bool elementIn_vector(Vector *v, int posicao, int *saida)
 int positionIn_vector(Vector *v, int elemento)
 {
     int stop = 0;
-    int *pos = -1;
+    int pos = -1;
 
     for (int i = 0; i < v->tam; i++)
     {
         if (v->vet[i] == elemento)
         {
-            pos = &(v->vet[i]);
+            pos = i;
             break;
         }
     }
@@ -240,12 +267,12 @@ void free_vector(Vector **endVetor)
 
 bool toString_vector(Vector *v, char *saida)
 {
-    saida[0] = "[";
+    saida[0] = '[';
     for (int i = 1; i <= v->tam; i++)
     {
-        itoa(v->vet[i - 1], &(saida[i]), 10);
+        snprintf((saida + i), sizeof(saida), "%d", v->vet[i]);
     }
-    saida[v->tam + 1] = "]";
+    saida[v->tam + 1] = ']';
 
     return true;
 }

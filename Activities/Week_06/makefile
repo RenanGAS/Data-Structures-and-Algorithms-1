@@ -7,6 +7,7 @@ all:
 
 run:
 	./${MAIN}
+
+clean:
 	rm *.o
 	rm ${MAIN}
-
