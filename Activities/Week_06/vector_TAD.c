@@ -24,7 +24,7 @@ void double_vector(Vector *v)
 {
     int tam_origin = v->tam;
 
-    int *doubleV = (int *)calloc(tam_origin * 2, sizeof(int));
+    int *doubleV = (int *)malloc(tam_origin * 2 * sizeof(int));
 
     for (int i = 0; i < tam_origin; i++)
     {
@@ -32,6 +32,8 @@ void double_vector(Vector *v)
     }
 
     freeAndAtt_intV_vector(v, doubleV, tam_origin * 2);
+
+    printf("\nERRO: O TAMANHO DO VETOR FOI DOBRADO.\n");
 }
 
 bool validate_vector(Vector *v)
@@ -54,8 +56,8 @@ bool validate_vector(Vector *v)
 
 Vector *create_vector()
 {
-    Vector *newVector = (Vector *)calloc(4, sizeof(int));
-    int *int_vector = (int *)calloc(10, sizeof(int));
+    Vector *newVector = (Vector *)malloc(sizeof(Vector));
+    int *int_vector = (int *)malloc(10 * sizeof(int));
     newVector->vet = int_vector;
     newVector->tam = 10;
     newVector->qtd = 0;
@@ -83,7 +85,7 @@ bool putIn_vector(Vector *v, int elemento, int posicao)
     if (v->qtd < v->tam)
     {
         int new_tam = v->tam + 1;
-        int *new_intV = (int *)calloc(new_tam, sizeof(int));
+        int *new_intV = (int *)malloc(new_tam * sizeof(int));
 
         int countForV = 0;
 
@@ -127,7 +129,7 @@ bool replaceIn_vector(Vector *v, int posicao, int novoElemento)
 bool rmPosition_vector(Vector *v, int posicao, int *endereco)
 {
     int new_tam = v->tam - 1;
-    int *new_intV = (int *)calloc(new_tam, sizeof(int));
+    int *new_intV = (int *)malloc(new_tam * sizeof(int));
 
     int countForV = 0;
 
@@ -161,7 +163,7 @@ bool rmPosition_vector(Vector *v, int posicao, int *endereco)
 int rmElement_vector(Vector *v, int elemento)
 {
     int new_tam = v->tam - 1;
-    int *new_intV = (int *)calloc(new_tam, sizeof(int));
+    int *new_intV = (int *)malloc(new_tam * sizeof(int));
 
     int stop = 0;
     int countForV = 0;
@@ -235,9 +237,9 @@ int positionIn_vector(Vector *v, int elemento)
 void print_vector(Vector *v)
 {
     printf("\n[");
-    for (int i = 0; i < v->tam; i++)
+    for (int i = 0; i < v->qtd; i++)
     {
-        if (i == (v->tam - 1))
+        if (i == (v->qtd - 1))
         {
             printf("%d]\n", v->vet[i]);
         }
@@ -256,12 +258,20 @@ void free_vector(Vector **endVetor)
 
 bool toString_vector(Vector *v, char *saida)
 {
-    saida[0] = '[';
-    for (int i = 1; i <= v->tam; i++)
+    strcat(saida, "[");
+
+    for (int i = 0; i < v->qtd; i++)
     {
-        snprintf((saida + i), sizeof(saida), "%d", v->vet[i]);
+        char elemento[10];
+        sprintf(elemento, "%d", v->vet[i]);
+        strcat(saida, elemento);
+
+        if (i != v->qtd - 1)
+        {
+            strcat(saida, ", ");
+        }
     }
-    saida[v->tam + 1] = ']';
+    strcat(saida, "]");
 
     return true;
 }
