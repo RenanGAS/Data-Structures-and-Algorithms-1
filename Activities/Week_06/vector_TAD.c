@@ -8,7 +8,20 @@ struct vector
     int qtd;
 };
 
-void double_vector(Vector *v, Vector **end_v)
+void free_vector(Vector **endVetor)
+{
+    free(*endVetor);
+    *endVetor = NULL;
+}
+
+void freeAndAttribute_vector(Vector **endVetor, Vector *newVector) // Função adicionada
+{
+    free(*endVetor);
+    *endVetor = NULL;
+    *endVetor = newVector;
+}
+
+void double_vector(Vector *v, Vector **end_v) // Função adicionada
 {
     int tam_origin = v->tam;
 
@@ -21,11 +34,11 @@ void double_vector(Vector *v, Vector **end_v)
         doubleVector->vet[i] = v->vet[i];
     }
 
-    free(*end_v);
+    free_vector(end_v);
     *end_v = doubleVector;
 }
 
-bool validate_vector(Vector *v)
+bool validate_vector(Vector *v) // Função adicionada
 {
     int t = v->tam;
     int q = v->qtd;
@@ -50,6 +63,15 @@ Vector *create_vector()
     return newVector;
 }
 
+Vector *createWithSize_vector(int n) // Função adicionada
+{
+    Vector *newVector = (Vector *)calloc(n, sizeof(int));
+    newVector->tam = n;
+    newVector->qtd = 0;
+
+    return newVector;
+}
+
 bool addIn_vector(Vector *v, int elemento)
 {
     if (validate_vector(v))
@@ -67,36 +89,28 @@ bool addIn_vector(Vector *v, int elemento)
 
 bool putIn_vector(Vector *v, int elemento, int posicao)
 {
-    int newQtd = v->qtd + 1;
-
-    if (newQtd < v->tam)
+    if (v->qtd < v->tam)
     {
-        if (posicao < v->qtd)
+        Vector *newV = createWithSize_vector(v->tam + 1);
+
+        int countForV = 0;
+
+        for (int i = 0; i < newV->tam; i++)
         {
-            int aux1 = 0;
-            int aux2 = 0;
-            for (int i = 0; i < newQtd; i++)
+            if (i != posicao)
             {
-                if (i == posicao)
-                {
-                    aux1 = v->vet[i];
-                    v->vet[i] = elemento;
-                }
-                else if (i > posicao)
-                {
-                    aux2 = v->vet[i];
-                    v->vet[i] = aux1;
-                    aux1 = aux2;
-                }
+                newV->vet[i] = v->vet[countForV];
+                countForV += 1;
             }
-            v->qtd += 1;
-            return true;
+            else
+            {
+                newV->vet[i] = elemento;
+            }
         }
-        else
-        {
-            v->qtd += 1;
-            replaceIn_vector(v, posicao, elemento);
-        }
+
+        freeAndAttribute_vector(&v, newV);
+
+        return true;
     }
     else
     {
@@ -113,6 +127,25 @@ bool replaceIn_vector(Vector *v, int posicao, int novoElemento)
 
 bool rmPosition_vector(Vector *v, int posicao, int *endereco)
 {
+    Vector *newV = createWithSize_vector(v->tam - 1);
+
+    int countForV = 0;
+
+    for (int i = 0; i < newV->tam; i++)
+    {
+        if (countForV != posicao)
+        {
+            newV->vet[i] = v->vet[countForV];
+        }
+
+        countForV++;
+    }
+
+    endereco = v->vet[posicao];
+
+    freeAndAttribute_vector(&v, newV);
+
+    return true;
 }
 
 int rmElement_vector(Vector *v, int elemento)
@@ -146,12 +179,6 @@ void print_vector(Vector *v)
             printf("%d, ", v->vet[i]);
         }
     }
-}
-
-void free_vector(Vector **endVetor)
-{
-    free(*endVetor);
-    *endVetor = NULL;
 }
 
 bool toString_vector(Vector *v, char *saida)
