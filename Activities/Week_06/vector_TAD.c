@@ -150,6 +150,28 @@ bool rmPosition_vector(Vector *v, int posicao, int *endereco)
 
 int rmElement_vector(Vector *v, int elemento)
 {
+    Vector *newV = createWithSize_vector(v->tam - 1);
+
+    int stop = 0;
+    int countForV = 0;
+
+    for (int i = 0; i < newV->tam; i++)
+    {
+        if ((v->vet[countForV] == elemento) && stop == 0)
+        {
+            newV->vet[i] = v->vet[countForV];
+            stop = 1;
+        }
+        else
+        {
+            newV->vet[i] = v->vet[countForV];
+        }
+        countForV++;
+    }
+
+    freeAndAttribute_vector(&v, newV);
+
+    return true;
 }
 
 int length_vector(Vector *v)
