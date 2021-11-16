@@ -7,6 +7,13 @@ typedef struct vectorElement
     struct vectorElement *endNext;
 } VectorElement;
 
+typedef struct treeElement
+{
+    int value;
+    struct treeElement *endPrevious;
+    struct treeElement *endNext;
+} TreeElement;
+
 void vectorChain(VectorElement **e)
 {
     VectorElement *element = (VectorElement *)malloc(sizeof(VectorElement));
@@ -38,9 +45,61 @@ void printVectorChain(VectorElement *e)
     }
 }
 
+void treeChain(TreeElement **a)
+{
+    TreeElement *element = (TreeElement *)malloc(sizeof(TreeElement));
+    element->value = 50;
+    element->endPrevious = NULL;
+    element->endNext = NULL;
+    *a = element;
+
+    element = (TreeElement *)malloc(sizeof(TreeElement));
+    element->value = 30;
+    element->endPrevious = NULL;
+    element->endNext = NULL;
+
+    (*a)->endPrevious = element;
+
+    element = (TreeElement *)malloc(sizeof(TreeElement));
+    element->value = 60;
+    element->endPrevious = NULL;
+    element->endNext = NULL;
+
+    (*a)->endNext = element;
+
+    element = (TreeElement *)malloc(sizeof(TreeElement));
+    element->value = 20;
+    element->endPrevious = NULL;
+    element->endNext = NULL;
+
+    (*a)->endPrevious->endPrevious = element;
+
+    element = (TreeElement *)malloc(sizeof(TreeElement));
+    element->value = 40;
+    element->endPrevious = NULL;
+    element->endNext = NULL;
+
+    (*a)->endPrevious->endNext = element;
+}
+
+void printTreeChain(TreeElement *a)
+{
+    printf("\nElementos da árvore encadeada:\n");
+
+    printf("\n%d\n", a->value);
+    printf("\n%d\n", a->endPrevious->value);
+    printf("\n%d\n", a->endNext->value);
+    printf("\n%d\n", a->endPrevious->endPrevious->value);
+    printf("\n%d\n", a->endPrevious->endNext->value);
+}
+
 int main()
 {
     VectorElement *e;
     vectorChain(&e);
     printVectorChain(e);
+
+    TreeElement *a;
+    treeChain(&a);
+    printTreeChain(a);
 }
