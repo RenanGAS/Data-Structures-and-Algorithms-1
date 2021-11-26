@@ -24,41 +24,41 @@ int main()
     printf("\nRESULTADO:\n");
     printf("\n%s\n", str1);
 
-    printf("\nTESTE PILHA_DESEMPILHAR || PILHA_TOPO\n");
-    int removed_element = 0;
-    pilha_desempilhar(new_stack1, &removed_element);
-    printf("\nRESULTADO:\n");
-    printf("\nELEMENTO REMOVIDO: %d\n", removed_element);
-    int top_element = 0;
-    pilha_topo(new_stack1, &top_element);
-    printf("\nELEMENTO NO TOPO: %d\n", top_element);
-    char str2[200];
-    pilha_toString(new_stack1, str2);
-    printf("\n%s\n", str2);
+    // printf("\nTESTE PILHA_DESEMPILHAR || PILHA_TOPO\n");
+    // int removed_element = 0;
+    // pilha_desempilhar(new_stack1, &removed_element);
+    // printf("\nRESULTADO:\n");
+    // printf("\nELEMENTO REMOVIDO: %d\n", removed_element);
+    // int top_element = 0;
+    // pilha_topo(new_stack1, &top_element);
+    // printf("\nELEMENTO NO TOPO: %d\n", top_element);
+    // char str2[200];
+    // pilha_toString(new_stack1, str2);
+    // printf("\n%s\n", str2);
 
-    printf("\nTESTE PILHA_VAZIA\n");
-    printf("\nRESULTADO:\n");
-    while (!pilha_vazia(new_stack1))
-    {
-        pilha_desempilhar(new_stack1, &removed_element);
-        printf("\nELEMENTO DESEMPILHADO: %d\n", removed_element);
-    }
-    if (pilha_vazia(new_stack1))
-    {
-        printf("\nPILHA ESVAZIADA COM SUCESSO\n");
-    }
+    // printf("\nTESTE PILHA_VAZIA\n");
+    // printf("\nRESULTADO:\n");
+    // while (!pilha_vazia(new_stack1))
+    // {
+    //     pilha_desempilhar(new_stack1, &removed_element);
+    //     printf("\nELEMENTO DESEMPILHADO: %d\n", removed_element);
+    // }
+    // if (pilha_vazia(new_stack1))
+    // {
+    //     printf("\nPILHA ESVAZIADA COM SUCESSO\n");
+    // }
 
-    if (!pilha_desempilhar(new_stack1, &removed_element))
-    {
-        printf("\nERRO AO DESEMPILHAR: A PILHA ESTA VAZIA\n");
-    }
+    // if (!pilha_desempilhar(new_stack1, &removed_element))
+    // {
+    //     printf("\nERRO AO DESEMPILHAR: A PILHA ESTA VAZIA\n");
+    // }
 
-    if (!pilha_topo(new_stack1, &top_element))
-    {
-        printf("\nERRO AO ACESSAR O TOPO: A PILHA ESTA VAZIA\n");
-    }
+    // if (!pilha_topo(new_stack1, &top_element))
+    // {
+    //     printf("\nERRO AO ACESSAR O TOPO: A PILHA ESTA VAZIA\n");
+    // }
 
-    pilha_destruir(&new_stack1);
+    // pilha_destruir(&new_stack1);
 
     return 0;
 }
