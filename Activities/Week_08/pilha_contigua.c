@@ -131,13 +131,13 @@ void pilha_toString(Pilha *stack, char *string)
 {
     strcat(string, "[");
 
-    for (int i = 0; i < stack->qtde; i++)
+    for (int i = stack->qtde - 1; i >= 0; i--)
     {
         char element[20];
         sprintf(element, "%d", stack->vetor[i]);
         strcat(string, element);
 
-        if (i < stack->qtde - 1)
+        if (i > 0)
         {
             strcat(string, ", ");
         }
