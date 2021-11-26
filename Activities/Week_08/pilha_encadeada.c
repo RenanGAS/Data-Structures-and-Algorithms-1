@@ -4,7 +4,7 @@
 typedef struct no
 {
     TipoElemento dado;
-    struct no *prox;
+    struct no *anterior;
 } No;
 
 struct pilha
@@ -15,27 +15,26 @@ struct pilha
 
 Pilha *pilha_criar()
 {
-    Pilha *p = (Pilha *)malloc(sizeof(Pilha));
-    p->qtde = 0;
-    p->topo = NULL;
-    return p;
+    Pilha *new_stack = (Pilha *)malloc(sizeof(Pilha));
+    new_stack->qtde = 0;
+    new_stack->topo = NULL;
+    return new_stack;
 }
 
 void pilha_destruir(Pilha **endereco)
 {
 }
 
-bool pilha_empilhar(Pilha *p, TipoElemento elemento)
+bool pilha_empilhar(Pilha *stack, TipoElemento element)
 {
+    No *new_knot = (No *)malloc(sizeof(No));
+    new_knot->dado = element;
+    new_knot->anterior = NULL;
 
-    No *novo = (No *)malloc(sizeof(No));
-    novo->dado = elemento;
-    novo->prox = NULL;
+    new_knot->anterior = stack->topo;
 
-    novo->prox = p->topo;
-
-    p->topo = novo;
-    p->qtde++;
+    stack->topo = new_knot;
+    stack->qtde++;
     return true;
 }
 
@@ -51,6 +50,25 @@ bool pilha_vazia(Pilha *p)
 {
 }
 
-void pilha_toString(Pilha *p, char *saida)
+void pilha_toString(Pilha *stack, char *string)
 {
+    No *aux = stack->topo;
+
+    strcat(string, "[");
+
+    for (int i = stack->qtde; i >= 1; i--)
+    {
+        char element[20];
+        sprintf(element, "%d", aux->dado);
+        strcat(string, element);
+
+        if (i > 1)
+        {
+            strcat(string, ", ");
+        }
+
+        aux = aux->anterior;
+    }
+
+    strcat(string, "]");
 }
