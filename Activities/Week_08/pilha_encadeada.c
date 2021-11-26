@@ -38,12 +38,31 @@ bool pilha_empilhar(Pilha *stack, TipoElemento element)
     return true;
 }
 
-bool pilha_desempilhar(Pilha *p, TipoElemento *saida)
+bool pilha_desempilhar(Pilha *stack, TipoElemento *removed_element)
 {
+    if (stack->qtde > 0)
+    {
+        No *aux = stack->topo;
+        *removed_element = aux->dado;
+        stack->topo = aux->anterior;
+        stack->qtde--;
+
+        return true;
+    }
+
+    return false;
 }
 
-bool pilha_topo(Pilha *p, TipoElemento *saida)
+bool pilha_topo(Pilha *stack, TipoElemento *top_element)
 {
+    if (stack->qtde > 0)
+    {
+        *top_element = stack->topo->dado;
+
+        return true;
+    }
+
+    return false;
 }
 
 bool pilha_vazia(Pilha *p)
