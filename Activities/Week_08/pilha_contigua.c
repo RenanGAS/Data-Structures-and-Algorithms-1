@@ -110,19 +110,19 @@ bool pilha_vazia(Pilha *stack)
     return true;
 }
 
-void pilha_destruir(Pilha **address_stack)
+void pilha_destruir(Pilha **stack_address)
 {
-    int old_value = (*address_stack)->vetor[1];
+    int old_value = (*stack_address)->vetor[1];
 
-    free(&(*address_stack)->vetor[0]);
+    free(&(*stack_address)->vetor[0]);
 
-    if ((*address_stack)->vetor[1] == old_value)
+    if ((*stack_address)->vetor[1] == old_value)
     {
         printf("\nERRO: NAO FOI POSSIVEL EXCLUIR O VETOR DA PILHA\n");
     }
 
-    free(*address_stack);
-    *address_stack = NULL;
+    free(*stack_address);
+    *stack_address = NULL;
 
     printf("\nPILHA DESTRUIDA COM SUCESSO\n");
 }
