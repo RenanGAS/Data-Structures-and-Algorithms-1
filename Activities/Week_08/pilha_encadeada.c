@@ -21,10 +21,6 @@ Pilha *pilha_criar()
     return new_stack;
 }
 
-void pilha_destruir(Pilha **endereco)
-{
-}
-
 bool pilha_empilhar(Pilha *stack, TipoElemento element)
 {
     No *new_knot = (No *)malloc(sizeof(No));
@@ -65,8 +61,22 @@ bool pilha_topo(Pilha *stack, TipoElemento *top_element)
     return false;
 }
 
-bool pilha_vazia(Pilha *p)
+bool pilha_vazia(Pilha *stack)
 {
+    if (stack->qtde > 0)
+    {
+        return false;
+    }
+
+    return true;
+}
+
+void pilha_destruir(Pilha **stack_address)
+{
+    free(*stack_address);
+    *stack_address = NULL;
+
+    printf("\nPILHA DESTRUIDA COM SUCESSO\n");
 }
 
 void pilha_toString(Pilha *stack, char *string)
