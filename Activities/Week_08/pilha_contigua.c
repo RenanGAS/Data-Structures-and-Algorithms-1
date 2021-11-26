@@ -76,7 +76,7 @@ bool pilha_empilhar(Pilha *stack, TipoElemento element)
 
 bool pilha_desempilhar(Pilha *stack, TipoElemento *output)
 {
-    if (stack->qtde != 0)
+    if (stack->qtde > 0)
     {
         verifica_diminui(stack);
 
@@ -88,11 +88,11 @@ bool pilha_desempilhar(Pilha *stack, TipoElemento *output)
     return false;
 }
 
-bool pilha_topo(Pilha *stack, TipoElemento *output)
+bool pilha_topo(Pilha *stack, TipoElemento *top_element)
 {
-    if (stack->qtde != 0)
+    if (stack->qtde > 0)
     {
-        *output = stack->vetor[stack->qtde - 1];
+        *top_element = stack->vetor[stack->qtde - 1];
 
         return true;
     }
