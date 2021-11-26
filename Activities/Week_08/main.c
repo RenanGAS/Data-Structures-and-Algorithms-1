@@ -19,39 +19,46 @@ int main()
     pilha_empilhar(new_stack1, 73);
     pilha_empilhar(new_stack1, 74);
 
-    char str[200];
-    pilha_toString(new_stack1, str);
+    char str1[200];
+    pilha_toString(new_stack1, str1);
     printf("\nRESULTADO:\n");
-    printf("\n%s\n", str);
+    printf("\n%s\n", str1);
 
-    // int element;
+    printf("\nTESTE PILHA_DESEMPILHAR || PILHA_TOPO\n");
+    int removed_element = 0;
+    pilha_desempilhar(new_stack1, &removed_element);
+    printf("\nRESULTADO:\n");
+    printf("\nELEMENTO REMOVIDO: %d\n", removed_element);
+    int top_element = 0;
+    pilha_topo(new_stack1, &top_element);
+    printf("\nELEMENTO NO TOPO: %d\n", top_element);
+    char str2[200];
+    pilha_toString(new_stack1, str2);
+    printf("\n%s\n", str2);
 
-    // pilha_topo(new_stack1, &element);
-    // printf("Topo: %d\n", element); 
+    printf("\nTESTE PILHA_VAZIA\n");
+    printf("\nRESULTADO:\n");
+    while (!pilha_vazia(new_stack1))
+    {
+        pilha_desempilhar(new_stack1, &removed_element);
+        printf("\nELEMENTO DESEMPILHADO: %d\n", removed_element);
+    }
+    if (pilha_vazia(new_stack1))
+    {
+        printf("\nPILHA ESVAZIADA COM SUCESSO\n");
+    }
 
-    // while (!pilha_vazia(new_stack1))
-    // {
-    //     pilha_desempilhar(new_stack1, &element);
-    //     printf("Desempilhado: %d\n", element);
-    // }
+    if (!pilha_desempilhar(new_stack1, &removed_element))
+    {
+        printf("\nERRO AO DESEMPILHAR: A PILHA ESTA VAZIA\n");
+    }
 
-    // /***********************************************
-    // * OPERAÇÕES NA PILHA VAZIA
-    // ************************************************/
-    // if (!pilha_desempilhar(new_stack1, &element))
-    // {
-    //     printf("Pilha vazia");
-    // }
+    if (!pilha_topo(new_stack1, &top_element))
+    {
+        printf("\nERRO AO ACESSAR O TOPO: A PILHA ESTA VAZIA\n");
+    }
 
-    // if (!pilha_topo(new_stack1, &element))
-    // {
-    //     printf("Pilha vazia");
-    // }
-
-    // pilha_toString(new_stack1, str);
-    // printf("%s\n", str); //[]
-
-    // pilha_destruir(&new_stack1);
+    pilha_destruir(&new_stack1);
 
     return 0;
 }
