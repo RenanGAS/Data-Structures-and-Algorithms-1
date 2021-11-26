@@ -1,9 +1,6 @@
 #include "pilha.h"
 #include <stdlib.h>
 
-/**************************************
-* Especificação do dados
-**************************************/
 typedef struct no
 {
     TipoElemento dado;
@@ -16,9 +13,6 @@ struct pilha
     No *topo;
 };
 
-/**************************************
-* Implementação das funções
-**************************************/
 Pilha *pilha_criar()
 {
     Pilha *p = (Pilha *)malloc(sizeof(Pilha));
@@ -26,7 +20,11 @@ Pilha *pilha_criar()
     p->topo = NULL;
     return p;
 }
-void pilha_destruir(Pilha **endereco);
+
+void pilha_destruir(Pilha **endereco)
+{
+}
+
 bool pilha_empilhar(Pilha *p, TipoElemento elemento)
 {
 
@@ -41,7 +39,18 @@ bool pilha_empilhar(Pilha *p, TipoElemento elemento)
     return true;
 }
 
-bool pilha_desempilhar(Pilha *p, TipoElemento *saida);
-bool pilha_topo(Pilha *p, TipoElemento *saida);
-bool pilha_vazia(Pilha *p);
-void pilha_toString(Pilha *p, char *saida);
+bool pilha_desempilhar(Pilha *p, TipoElemento *saida)
+{
+}
+
+bool pilha_topo(Pilha *p, TipoElemento *saida)
+{
+}
+
+bool pilha_vazia(Pilha *p)
+{
+}
+
+void pilha_toString(Pilha *p, char *saida)
+{
+}
