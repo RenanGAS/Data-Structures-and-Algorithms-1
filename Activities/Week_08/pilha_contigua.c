@@ -40,6 +40,7 @@ void verifica_diminui(Pilha *stack)
     if (stack->qtde + 5 < stack->tam)
     {
         int *new_vector = (int *)malloc((stack->qtde + 5) * sizeof(TipoElemento));
+        stack->tam = stack->qtde + 5;
 
         for (int i = 0; i < stack->qtde; i++)
         {
@@ -49,6 +50,7 @@ void verifica_diminui(Pilha *stack)
         freeAtt_vector(&stack->vetor, new_vector);
 
         printf("\nATUALIZACAO: VETOR DA PILHA DIMINUIDO. HA 5 ESPACOS VAZIOS\n");
+        printf("\nqtde: %d\n\nTAM: %d\n", stack->qtde, stack->tam);
     }
 }
 
