@@ -19,7 +19,7 @@ int main()
     pilha_empilhar(new_stack1, 73);
     pilha_empilhar(new_stack1, 74);
 
-    char str1[200];
+    char str1[200] = "";
     pilha_toString(new_stack1, str1);
     printf("\nRESULTADO:\n");
     printf("\n%s\n", str1);
