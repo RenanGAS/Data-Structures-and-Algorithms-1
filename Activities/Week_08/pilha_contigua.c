@@ -35,7 +35,22 @@ void verifica_aumenta(Pilha *stack)
     }
 }
 
-void verifica_diminui(Pilha *p);
+void verifica_diminui(Pilha *stack)
+{
+    if (stack->qtde + 5 < stack->tam)
+    {
+        int *new_vector = (int *)malloc((stack->qtde + 5) * sizeof(TipoElemento));
+
+        for (int i = 0; i < stack->qtde; i++)
+        {
+            new_vector[i] = stack->vetor[i];
+        }
+
+        freeAtt_vector(&stack->vetor, new_vector);
+
+        printf("\nATUALIZACAO: VETOR DA PILHA DIMINUIDO. HA 5 ESPACOS VAZIOS\n");
+    }
+}
 
 // Funções Principais
 
@@ -57,10 +72,58 @@ bool pilha_empilhar(Pilha *stack, TipoElemento element)
     return true;
 }
 
-bool pilha_desempilhar(Pilha *p, TipoElemento *saida);
-bool pilha_topo(Pilha *p, TipoElemento *saida);
-void pilha_destruir(Pilha **endereco);
-bool pilha_vazia(Pilha *p);
+bool pilha_desempilhar(Pilha *stack, TipoElemento *output)
+{
+    if (stack->qtde != 0)
+    {
+        verifica_diminui(stack);
+
+        *output = stack->vetor[stack->qtde - 1];
+        stack->qtde--;
+        return true;
+    }
+
+    return false;
+}
+
+bool pilha_topo(Pilha *stack, TipoElemento *output)
+{
+    if (stack->qtde != 0)
+    {
+        *output = stack->vetor[stack->qtde - 1];
+
+        return true;
+    }
+
+    return false;
+}
+
+bool pilha_vazia(Pilha *stack)
+{
+    if (stack->qtde > 0)
+    {
+        return false;
+    }
+
+    return true;
+}
+
+void pilha_destruir(Pilha **address_stack)
+{
+    int old_value = (*address_stack)->vetor[1];
+
+    free(&(*address_stack)->vetor[0]);
+
+    if ((*address_stack)->vetor[1] == old_value)
+    {
+        printf("\nERRO: NAO FOI POSSIVEL EXCLUIR O VETOR DA PILHA\n");
+    }
+
+    free(*address_stack);
+    *address_stack = NULL;
+
+    printf("\nPILHA DESTRUIDA COM SUCESSO\n");
+}
 
 void pilha_toString(Pilha *stack, char *string)
 {
