@@ -78,10 +78,11 @@ bool pilha_desempilhar(Pilha *stack, TipoElemento *output)
 {
     if (stack->qtde > 0)
     {
-        verifica_diminui(stack);
-
         *output = stack->vetor[stack->qtde - 1];
         stack->qtde--;
+
+        verifica_diminui(stack);
+        
         return true;
     }
 
