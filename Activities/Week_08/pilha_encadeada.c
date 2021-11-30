@@ -92,7 +92,8 @@ void pilha_destruir(Pilha **stack_address)
 void pilha_toString(Pilha *stack, char *string)
 {
     No *aux = stack->topo;
-
+    
+    string[0] = '\0';
     strcat(string, "[");
 
     for (int i = stack->qtde; i >= 1; i--)
