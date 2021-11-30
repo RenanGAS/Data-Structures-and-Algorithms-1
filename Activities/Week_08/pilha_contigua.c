@@ -103,12 +103,7 @@ bool pilha_topo(Pilha *stack, TipoElemento *top_element)
 
 bool pilha_vazia(Pilha *stack)
 {
-    if (stack->qtde > 0)
-    {
-        return false;
-    }
-
-    return true;
+    return (stack->qtde == 0 ? true : false);
 }
 
 void pilha_destruir(Pilha **stack_address)
