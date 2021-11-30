@@ -53,6 +53,9 @@ bool pilha_desempilhar(Pilha *stack, TipoElemento *removed_element)
         No *aux = stack->topo;
         *removed_element = aux->dado;
         stack->topo = aux->anterior;
+
+        free(aux);
+        
         stack->qtde--;
 
         return true;
