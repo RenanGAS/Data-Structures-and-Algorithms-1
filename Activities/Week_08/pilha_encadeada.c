@@ -13,6 +13,20 @@ struct pilha
     No *topo;
 };
 
+// Funções Auxiliares
+
+No *no_criar(TipoElemento element)
+{
+    No *new_knot = (No *)malloc(sizeof(No));
+    new_knot->dado = element;
+    new_knot->anterior = NULL;
+
+    return new_knot;
+}
+
+
+// Funções Principais
+
 Pilha *pilha_criar()
 {
     Pilha *new_stack = (Pilha *)malloc(sizeof(Pilha));
@@ -23,9 +37,7 @@ Pilha *pilha_criar()
 
 bool pilha_empilhar(Pilha *stack, TipoElemento element)
 {
-    No *new_knot = (No *)malloc(sizeof(No));
-    new_knot->dado = element;
-    new_knot->anterior = NULL;
+    No *new_knot = no_criar(element);
 
     new_knot->anterior = stack->topo;
 
