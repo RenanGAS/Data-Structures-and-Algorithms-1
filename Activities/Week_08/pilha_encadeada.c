@@ -83,7 +83,18 @@ bool pilha_vazia(Pilha *stack)
 
 void pilha_destruir(Pilha **stack_address)
 {
-    free(*stack_address);
+    Pilha *stack = *stack_address;
+    No *aux;
+    
+    while (stack->topo != NULL)
+    {
+        aux = stack->topo;
+        stack->topo = aux->anterior;
+
+        free(aux);
+    }
+    
+    free(stack);
     *stack_address = NULL;
 
     printf("\nPILHA DESTRUIDA COM SUCESSO\n");
@@ -92,7 +103,7 @@ void pilha_destruir(Pilha **stack_address)
 void pilha_toString(Pilha *stack, char *string)
 {
     No *aux = stack->topo;
-    
+
     string[0] = '\0';
     strcat(string, "[");
 
