@@ -61,6 +61,7 @@ bool fila_inserir(Fila *f, TipoElemento elemento)
     }
 
     f->fim = new_knot;
+    f->qtde++;
 
     return true;
 }
@@ -95,4 +96,24 @@ int fila_tamanho(Fila *f)
 
 void fila_toString(Fila *f, char *saida)
 {
+    saida[0] = '\0';
+
+    strcat(saida, "[");
+
+    No *aux = f->inicio;
+
+    while (aux != NULL)
+    {
+        char dado[10];
+        sprintf(dado, "%d", aux->dado);
+        strcat(saida, dado);
+        aux = aux->anterior;
+
+        if (aux != NULL)
+        {
+            strcat(saida, ",");
+        }
+    }
+
+    strcat(saida, "]");
 }
