@@ -68,12 +68,25 @@ bool fila_inserir(Fila *f, TipoElemento elemento)
 
 bool fila_remover(Fila *f, TipoElemento *saida)
 {
+    if (f->inicio != NULL)
+    {
+        No *aux = f->inicio;
+        *saida = aux->dado;
+        f->inicio = f->inicio->anterior;
+
+        free(aux);
+        f->qtde--;
+
+        return true;
+    }
+
+    return false;
 }
 
 bool fila_primeiro(Fila *f, TipoElemento *saida)
 {
     *saida = f->inicio->dado;
-    
+
     return (f->inicio != NULL ? true : false);
 }
 
@@ -87,6 +100,17 @@ bool fila_vazia(Fila *f)
 
 void fila_destruir(Fila **enderecoFila)
 {
+    Fila *fila = *enderecoFila;
+    No *aux = fila->inicio;
+
+    while (aux != NULL)
+    {
+        free(aux);
+        aux = aux->anterior;
+    }
+
+    free(*enderecoFila);
+    *enderecoFila = NULL;
 }
 
 int fila_tamanho(Fila *f)
