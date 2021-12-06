@@ -72,6 +72,9 @@ bool fila_remover(Fila *f, TipoElemento *saida)
 
 bool fila_primeiro(Fila *f, TipoElemento *saida)
 {
+    *saida = f->inicio->dado;
+    
+    return (f->inicio != NULL ? true : false);
 }
 
 bool fila_vazia(Fila *f)
