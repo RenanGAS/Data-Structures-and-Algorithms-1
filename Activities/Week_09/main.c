@@ -29,22 +29,22 @@ int main()
     /**************************************
     * Teste remocao
     **************************************/
-    printf("----- Teste Remocao -----\n");
-    fila_remover(f1, &elemento);
-    printf("%s\n", elemento == 10 ? "[OK]" : ERRO);
+    // printf("----- Teste Remocao -----\n");
+    // fila_remover(f1, &elemento);
+    // printf("%s\n", elemento == 10 ? "[OK]" : ERRO);
 
-    fila_remover(f1, &elemento);
-    printf("%s\n", elemento == 20 ? "[OK]" : ERRO);
+    // fila_remover(f1, &elemento);
+    // printf("%s\n", elemento == 20 ? "[OK]" : ERRO);
 
-    fila_remover(f1, &elemento);
-    printf("%s\n", elemento == 30 ? "[OK]" : ERRO);
+    // fila_remover(f1, &elemento);
+    // printf("%s\n", elemento == 30 ? "[OK]" : ERRO);
 
-    bool resultado = fila_remover(f1, &elemento);
-    printf("%s\n", resultado == false ? "[OK]" : ERRO);
+    // bool resultado = fila_remover(f1, &elemento);
+    // printf("%s\n", resultado == false ? "[OK]" : ERRO);
 
-    printf("----- Teste toString fila vazia -----\n");
-    fila_toString(f1, str);
-    printf("%s\n", strcmp(str, "[]") == 0 ? "[OK]" : ERRO);
+    // printf("----- Teste toString fila vazia -----\n");
+    // fila_toString(f1, str);
+    // printf("%s\n", strcmp(str, "[]") == 0 ? "[OK]" : ERRO);
 
-    fila_destruir(&f1);
+    // fila_destruir(&f1);
 }
