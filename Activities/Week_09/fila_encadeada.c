@@ -26,6 +26,15 @@ bool fila_ehValida(Fila *f)
     return (f != NULL ? true : false);
 }
 
+No *no_criar(TipoElemento dado)
+{
+    No *new_knot = (No *)malloc(sizeof(No));
+    new_knot->dado = dado;
+    new_knot->anterior = NULL;
+
+    return new_knot;
+}
+
 /**************************************
 * IMPLEMENTAÇÃO
 **************************************/
@@ -40,6 +49,20 @@ Fila *fila_criar()
 
 bool fila_inserir(Fila *f, TipoElemento elemento)
 {
+    No *new_knot = no_criar(elemento);
+
+    if (f->qtde == 0)
+    {
+        f->inicio = new_knot;
+    }
+    else
+    {
+        f->fim->anterior = new_knot;
+    }
+
+    f->fim = new_knot;
+
+    return true;
 }
 
 bool fila_remover(Fila *f, TipoElemento *saida)
