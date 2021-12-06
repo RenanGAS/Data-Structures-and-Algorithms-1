@@ -38,12 +38,17 @@ Fila *fila_criar()
     return fila;
 }
 
-void fila_destruir(Fila **enderecoFila);
+bool fila_inserir(Fila *f, TipoElemento elemento)
+{
+}
 
-bool fila_inserir(Fila *f, TipoElemento elemento);
-bool fila_remover(Fila *f, TipoElemento *saida);
+bool fila_remover(Fila *f, TipoElemento *saida)
+{
+}
 
-bool fila_primeiro(Fila *f, TipoElemento *saida);
+bool fila_primeiro(Fila *f, TipoElemento *saida)
+{
+}
 
 bool fila_vazia(Fila *f)
 {
@@ -51,6 +56,10 @@ bool fila_vazia(Fila *f)
         return true;
 
     return (f->qtde == 0 ? true : false);
+}
+
+void fila_destruir(Fila **enderecoFila)
+{
 }
 
 int fila_tamanho(Fila *f)
