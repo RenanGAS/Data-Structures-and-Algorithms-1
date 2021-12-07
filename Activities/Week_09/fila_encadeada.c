@@ -77,6 +77,11 @@ bool fila_remover(Fila *f, TipoElemento *saida)
         free(aux);
         f->qtde--;
 
+        if (f->inicio == NULL)
+        {
+            f->fim = NULL;
+        }
+
         return true;
     }
 
