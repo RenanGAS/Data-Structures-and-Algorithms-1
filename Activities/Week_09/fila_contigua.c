@@ -109,17 +109,21 @@ void fila_toString(Fila *f, char *str)
     str[0] = '\0';
     strcat(str, "[");
 
-    for (int i = f->inicio; i < f->qtde; i++)
+    int i = f->inicio;
+
+    while (i != f->fim)
     {
         char aux[10];
         sprintf(aux, "%d", f->vetor[i]);
         strcat(str, aux);
 
-        if (i + 1 != f->qtde)
+        if ((i + 1) % f->tam != f->fim)
         {
             strcat(str, ",");
         }
+
+        i = (i + 1) % f->tam;
     }
-    
+
     strcat(str, "]");
 }
