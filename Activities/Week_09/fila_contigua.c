@@ -54,7 +54,7 @@ bool fila_inserir(Fila *f, TipoElemento elemento)
     if (f->qtde != f->tam)
     {
         f->vetor[f->fim] = elemento;
-        f->fim++;
+        f->fim = (f->fim + 1) % f->tam;
         f->qtde++;
 
         return true;
@@ -68,8 +68,7 @@ bool fila_remover(Fila *f, TipoElemento *saida)
     if (f->qtde != 0)
     {
         *saida = f->vetor[f->inicio];
-        f->inicio++;
-        f->fim++;
+        f->inicio = (f->inicio + 1) % f->tam;
         f->qtde--;
 
         return true;
